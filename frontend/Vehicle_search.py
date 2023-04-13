@@ -19,27 +19,27 @@ class Vehicle_search(Toplevel):
         self.stock = 0;
         # find Vehicle
         findVehicle_vin = Label(self, text="VIN: ")
-        findVehicle_vin.grid(column=0, row=0)
-        findVehicle_vin_entry = Entry(self, width=10, textvariable=self.vin)  
-        findVehicle_vin_entry.grid(column=1, row=0)
+        findVehicle_vin.grid(column=0, row=0, pady=(150,0), padx=(150, 0))
+        findVehicle_vin_entry = Entry(self, width=30, textvariable=self.vin)  
+        findVehicle_vin_entry.grid(column=1, row=0, pady=(150,0), padx=(0, 150))
 
         findVehicle_make= Label(self, text="Make: ")
-        findVehicle_make.grid(column=0, row=1)
-        findVehicle_make_entry = tk.Entry(self, width=10, textvariable=self.make)
-        findVehicle_make_entry.grid(column=1, row=1)
+        findVehicle_make.grid(column=0, row=1, pady=(37.5,0), padx=(150, 0))
+        findVehicle_make_entry = tk.Entry(self, width=30, textvariable=self.make)
+        findVehicle_make_entry.grid(column=1, row=1, pady=(37.5,0), padx=(0, 150))
 
         findVehicle_model = Label(self, text="Model: ")
-        findVehicle_model.grid(column=0, row=2)
-        findVehicle_model_entry = tk.Entry(self, width=10, textvariable=self.model)
-        findVehicle_model_entry.grid(column=1, row=2)
+        findVehicle_model.grid(column=0, row=2, pady=(37.5,0), padx=(150, 0))
+        findVehicle_model_entry = tk.Entry(self, width=30, textvariable=self.model)
+        findVehicle_model_entry.grid(column=1, row=2, pady=(37.5,0), padx=(0, 150))
 
         findVehicle_year = Label(self, text="Year: ")
-        findVehicle_year.grid(column=0, row=3)
-        findVehicle_year_entry = tk.Entry(self, width=10, textvariable=self.year)
-        findVehicle_year_entry.grid(column=1, row=3)
+        findVehicle_year.grid(column=0, row=3, pady=(37.5,0), padx=(150, 0))
+        findVehicle_year_entry = tk.Entry(self, width=30, textvariable=self.year)
+        findVehicle_year_entry.grid(column=1, row=3, pady=(37.5,0), padx=(0, 150))
 
         findVehicle_button = Button(self, text="Find Vehicle", command=self.locate_vehicle)
-        findVehicle_button.grid(column=0, row=4)
+        findVehicle_button.grid(column=0, row=4, pady=(37.5,0), padx=(37.5, 0), columnspan = 2)
     def locate_vehicle(self):
         self.data = find_vehicle(self.connection, self.vin)
 
