@@ -49,7 +49,7 @@ locate_vehicle_button.grid(column=1, row=0, pady=(100, 20))
 
 #Buttons and stuff for search functionality
 
-#Add commands for add and remove buttons
+#Add commands/functions for add and remove buttons
 addBar = tk.Entry(root)
 addButton = tk.Button(text="Add")
 
