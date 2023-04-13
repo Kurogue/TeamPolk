@@ -32,6 +32,7 @@ def search_button_clicked():
     update(data)
 
 def v_search():
+    
     Vehicle_search(root)
    
 #move to locate a Vehicle

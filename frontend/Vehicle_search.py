@@ -2,14 +2,14 @@
 
 from backend.db import connect
 from backend.queries.vehicle_queries import *
-
+from tkinter import *
 import tkinter as tk
 
-class Vehicle_search:
-    def __init__(self, root):
-        root.title("Vehicle Tracking Service")
-        root.geometry("400x400")
-
+class Vehicle_search(Toplevel):
+    def __init__(self, master=None):
+        super().__init__(master = master)
+        self.title("Vehicle Search")
+        self.geometry("600x600")
         self.vin = ""
         self.make = ""
         self.model = ""
@@ -18,29 +18,28 @@ class Vehicle_search:
         self.data = None
         self.stock = 0;
         # find Vehicle
-        findVehicle_vin = tk.Label(root, text="VIN: ")
+        findVehicle_vin = Label(self, text="VIN: ")
         findVehicle_vin.grid(column=0, row=0)
-        findVehicle_vin_entry = tk.Entry(root, width=10, textvariable=self.vin)  
+        findVehicle_vin_entry = Entry(self, width=10, textvariable=self.vin)  
         findVehicle_vin_entry.grid(column=1, row=0)
 
-        findVehicle_make= tk.Label(root, text="Make: ")
+        findVehicle_make= Label(self, text="Make: ")
         findVehicle_make.grid(column=0, row=1)
-        findVehicle_make_entry = tk.Entry(root, width=10, textvariable=self.make)
+        findVehicle_make_entry = tk.Entry(self, width=10, textvariable=self.make)
         findVehicle_make_entry.grid(column=1, row=1)
 
-        findVehicle_model = tk.Label(root, text="Model: ")
+        findVehicle_model = Label(self, text="Model: ")
         findVehicle_model.grid(column=0, row=2)
-        findVehicle_model_entry = tk.Entry(root, width=10, textvariable=self.model)
+        findVehicle_model_entry = tk.Entry(self, width=10, textvariable=self.model)
         findVehicle_model_entry.grid(column=1, row=2)
 
-        findVehicle_year = tk.Label(root, text="Year: ")
+        findVehicle_year = Label(self, text="Year: ")
         findVehicle_year.grid(column=0, row=3)
-        findVehicle_year_entry = tk.Entry(root, width=10, textvariable=self.year)
+        findVehicle_year_entry = tk.Entry(self, width=10, textvariable=self.year)
         findVehicle_year_entry.grid(column=1, row=3)
 
-        findVehicle_button = tk.Button(text="Find Vehicle", commmand=self.locate_vehicle)
+        findVehicle_button = Button(self, text="Find Vehicle", command=self.locate_vehicle)
         findVehicle_button.grid(column=0, row=4)
-        root.mainloop()
     def locate_vehicle(self):
         self.data = find_vehicle(self.connection, self.vin)
 
