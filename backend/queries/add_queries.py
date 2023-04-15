@@ -5,10 +5,10 @@
 def add_vehicle(connection, vin, make, model, year, instock):
 	cur = connection.cursor()
 	#lookup to make sure the vehicle doesn't exist
-	find = """SELECT VIN FROM Vehicle WHERE VIN = (%s);"""
+	find = """SELECT VIN FROM Vehicle WHERE VIN = %s;"""
 	data = (vin)
 	cur.execute(find, data)
-	if cur.fetchone() is None:
+	if cur.fetchone() is not None:
 		#print("Vehicle Already in Table")#Need to print to the window
 		return
 	else:
@@ -18,21 +18,21 @@ def add_vehicle(connection, vin, make, model, year, instock):
 	#add to either the instock list or back order
 	if instock == 1:
 		instock = """INSERT INTO Instock (VIN, Date, Available) VALUES (%s, %s, %s);"""
-		date = datetime.date
+		date = datetime.date.today()
 		values =(vin, date, True)
 		cur.execute(instock, values)
 		connection.commit()
 	else:
-		Backorder = """INSERT INTO Backorder (VIN, Date, Available) VALUES (%s, %s, %s);"""
-		date = datetime.date
+		backorder = """INSERT INTO Backorder (VIN, Date, Available) VALUES (%s, %s, %s);"""
+		date = datetime.date.today()
 		values =(vin, date, False)
-		cur.execute(instock, values)
+		cur.execute(backorder, values)
 		connection.commit()
 	return 
 #Add Interior 
 def add_interior(connection, int_id, type_, descript, color):
 	cur = connection.cursor()
-	find = """SELECT Interior_id FROM Interior WHERE Interior_id = (%s);"""
+	find = """SELECT Interior_id FROM Interior WHERE Interior_id = %s;"""
 	data = (int_id)
 	cur.execute(find, data)
 	if cur.fetchone() is None:
@@ -47,7 +47,7 @@ def add_interior(connection, int_id, type_, descript, color):
 #Add Package
 def add_package(connection, pack_id, name, descript):
 	cur = connection.cursor()
-	find = """SELECT Package_id FROM package WHERE Package_id = (%s);"""
+	find = """SELECT Package_id FROM Package WHERE Package_id = %s;"""
 	data = (pack_id)
 	cur.execute(find, data)
 	if cur.fetchone() is None:
@@ -61,7 +61,7 @@ def add_package(connection, pack_id, name, descript):
 #Add Performance
 def add_performance(connection, perform_id, type_, descript):
 	cur = connection.cursor()
-	find = """SELECT Perform_id FROM Performance WHERE Perform_id = (%s);"""
+	find = """SELECT Perform_id FROM Performance WHERE Perform_id = %s;"""
 	data = (perform_id)
 	cur.execute(find, data)
 	if cur.fetchone() is None:
@@ -76,7 +76,7 @@ def add_performance(connection, perform_id, type_, descript):
 #Add Safety/Security
 def add_safe_security(connection, safety_id, name, descript):
 	cur = connection.cursor()
-	find = """SELECT Safety_id FROM Safety WHERE Safety_id = (%s);"""
+	find = """SELECT Safety_id FROM Safety WHERE Safety_id = %s;"""
 	data = (safety_id)
 	cur.execute(find, data)
 	if cur.fetchone() is None:
@@ -91,7 +91,7 @@ def add_safe_security(connection, safety_id, name, descript):
 #Add Warranty
 def add_warranty(connection, w_no, type_, descript):
 	cur = connection.cursor()
-	find = """SELECT Warranty_no FROM Warranty WHERE Warranty_no = (%s);"""
+	find = """SELECT Warranty_no FROM Warranty WHERE Warranty_no = %s;"""
 	data = (w_no)
 	cur.execute(find, data)
 	if cur.fetchone() is None:
@@ -105,7 +105,7 @@ def add_warranty(connection, w_no, type_, descript):
 #Add Audio
 def add_audio(connection, audio_id, type_, descript):
 	cur = connection.cursor()
-	find = """SELECT Audio_id FROM Audio WHERE Audio_id = (%s);"""
+	find = """SELECT Audio_id FROM Audio WHERE Audio_id = %s;"""
 	data = (audio_id)
 	cur.execute(find, data)
 	if cur.fetchone() is None:
@@ -120,7 +120,7 @@ def add_audio(connection, audio_id, type_, descript):
 #Add Comfort Features
 def add_features(connection, f_id, name, descript):
 	cur = connection.cursor()
-	find = """SELECT Feature_id FROM Feature WHERE Feature_id = (%s);"""
+	find = """SELECT Feature_id FROM Feature WHERE Feature_id = %s;"""
 	data = (f_id)
 	cur.execute(find, data)
 	if cur.fetchone() is None:
@@ -131,19 +131,25 @@ def add_features(connection, f_id, name, descript):
 		cur.execute(add, data)
 		connection.commit()
 	return
+#Add Controls
+def add_control(connection, control_id, type_, descript):
+	cur = connection.cursor()
+	find = """SELECT Control_id FROM Control WHERE Control_id = %s;"""
+	data = (control_id)
+	cur.execute(find, data)
+	if cur.fetchone() is None:
+		return
+	else:
+		add = """INSERT INTO Control (Control_id, Type, Description) VALUES (%s, %s, %s);"""
+		data = (control_id, type_, descript)
+		cur.execute(add, data)
+		connection.commit()
+	return
 
 #Add Exterior
-def add_exterior(connection, exterior_id, type_, description, color):
-    query = """
-    INSERT INTO Exterior (Exterior_id, Type, Description, Color)
-    VALUES (%s, %s, %s, %s);
-    """
-    data = (exterior_id, type_, description, color)
-    execute_query(connection, query, data)
-    return
 def add_exterior(connection, exterior_id, type_, descript, color):
 	cur = connection.cursor()
-	find = """SELECT Exterior_id FROM Exterior WHERE Exterior_id = (%s);"""
+	find = """SELECT Exterior_id FROM Exterior WHERE Exterior_id = %s;"""
 	data = (exterior_id)
 	cur.execute(find, data)
 	if cur.fetchone() is None:
@@ -158,7 +164,7 @@ def add_exterior(connection, exterior_id, type_, descript, color):
 #Add Handling
 def add_handling(connection, h_id, type_, descript):
 	cur = connection.cursor()
-	find = """SELECT Handling_id FROM Handling WHERE Handling_id = (%s);"""
+	find = """SELECT Handling_id FROM Handling WHERE Handling_id = %s;"""
 	data = (h_id)
 	cur.execute(find, data)
 	if cur.fetchone() is None:
@@ -169,10 +175,11 @@ def add_handling(connection, h_id, type_, descript):
 		cur.execute(add, data)
 		connection.commit()
 	return
+
 #Add Maintenance
 def add_maintenance(connection, main_no, date_time, service, e_id=None):
 	cur = connection.cursor()
-	find = """SELECT Main_no FROM Maintenance WHERE Main_no = (%s);"""
+	find = """SELECT Main_no FROM Maintenance WHERE Main_no = %s;"""
 	data = (main_no)
 	cur.execute(find, data)
 	if cur.fetchone() is None:
@@ -183,10 +190,11 @@ def add_maintenance(connection, main_no, date_time, service, e_id=None):
 		cur.execute(add, data)
 		connection.commit()
 	return
+
 #Add Employee - Maintenance
 def add_maintenance_employee(connection, e_id, ssn, fname, lname, start, address):
 	cur = connection.cursor()
-	find = """SELECT Employ_id FROM Maintence_employ WHERE Employ_id = (%s);"""
+	find = """SELECT Employ_id FROM Maintence_employ WHERE Employ_id = %s;"""
 	data = (e_id)
 	cur.execute(find, data)
 	if cur.fetchone() is None:
@@ -200,7 +208,7 @@ def add_maintenance_employee(connection, e_id, ssn, fname, lname, start, address
 #Add Employee - Manager
 def add_manager_employee(connection, e_id, ssn, fname, lname, start, address):
 	cur = connection.cursor()
-	find = """SELECT Employ_id FROM Manager WHERE Employ_id = (%s);"""
+	find = """SELECT Employ_id FROM Manager WHERE Employ_id = %s;"""
 	data = (e_id)
 	cur.execute(find, data)
 	if cur.fetchone() is None:
@@ -214,7 +222,7 @@ def add_manager_employee(connection, e_id, ssn, fname, lname, start, address):
 #Add Employee - Sales
 def add_sales_employee(connection, e_id, ssn, fname, lname, start, address):
 	cur = connection.cursor()
-	find = """SELECT Employ_id FROM Sales_employ WHERE Employ_id = (%s);"""
+	find = """SELECT Employ_id FROM Sales_employ WHERE Employ_id = %s;"""
 	data = (e_id)
 	cur.execute(find, data)
 	if cur.fetchone() is None:
@@ -228,7 +236,7 @@ def add_sales_employee(connection, e_id, ssn, fname, lname, start, address):
 #Add Customer
 def add_customer(connection, name, address, email, dob, p_no):
 	cur = connection.cursor()
-	find = """SELECT Name, Email FROM Customer WHERE Name = (%s) AND Email = (%s);"""
+	find = """SELECT Name, Email FROM Customer WHERE Name = %s AND Email = %s;"""
 	data = (name, email)
 	cur.execute(find, data)
 	if cur.fetchone() is None:
