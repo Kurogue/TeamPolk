@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\backend",
+    "\\backend\\queries",
+    "\\frontend"
   ],
-  "SelectedNode": "\\C:\\Users\\alber\\Documents\\ComputerScience\\Software Classes\\CEN-4020\\TeamPolk",
   "PreviewInSolutionExplorer": false
 }
