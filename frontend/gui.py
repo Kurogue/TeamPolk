@@ -15,26 +15,6 @@ root = tk.Tk()
 root.title("Vehicle Tracking Service")
 root.geometry("800x600")
 
-'''
-No longer needed since the backend searches the databse for the vehicle
-'''
-# def update(data):
-#     my_list.delete(0, tk.END)
-#     for item in data:
-#         my_list.insert(tk.END, item)
-
-# def search_button_clicked():
-#     typed = search.get()
-#     if typed == '':
-#         data = lst
-#     else:
-#         data = []
-#         for item in lst:
-#             if typed.lower() in [str(elem).lower() for elem in item]:
-#                 data.append(item)
-#     print("Search results:", data)
-#     update(data)
-
 def v_search():
     
     Vehicle_search(root)
