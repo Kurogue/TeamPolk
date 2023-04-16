@@ -29,6 +29,39 @@ def add_vehicle(connection, vin, make, model, year, instock):
 		cur.execute(backorder, values)
 		connection.commit()
 	return 
+'''
+def add_vehicle(connection, vin, make, model, year, instock):
+    cur = connection.cursor()
+    try:
+        # Check if the vehicle already exists in the database
+        find_query = """SELECT VIN FROM Vehicle WHERE VIN = %s;"""
+        cur.execute(find_query, (vin,))
+        if cur.fetchone() is not None:
+            print("Vehicle already exists in the table") # Print to the console
+            
+        else:
+            # Insert the new vehicle into the database
+            add_query = """INSERT INTO Vehicle (VIN, Make, Model, Year) VALUES (%s, %s, %s, %s);"""
+            cur.execute(add_query, (vin, make, model, year))
+            
+            # If instock, add to the instock table, otherwise add to backorder table
+            if instock == 1:
+                instock_query = """INSERT INTO Instock (VIN, Date, Available) VALUES (%s, %s, %s);"""
+                date = datetime.date.today()
+                cur.execute(instock_query, (vin, date, True))
+                print("Vehicle added to instock")
+            else:
+                backorder_query = """INSERT INTO Backorder (VIN, Date, Available) VALUES (%s, %s, %s);"""
+                date = datetime.date.today()
+                cur.execute(backorder_query, (vin, date, False))
+                print("Vehicle added to backorder")
+        
+        connection.commit() # Commit the changes
+        
+    except (Exception, psycopg2.DatabaseError) as error:
+        print("Error occurred while adding vehicle to database:", error)
+        connection.rollback() # Rollback the changes if any error occurs
+'''
 #Add Interior 
 def add_interior(connection, int_id, type_, descript, color):
 	cur = connection.cursor()
