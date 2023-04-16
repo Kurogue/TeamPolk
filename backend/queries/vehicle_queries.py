@@ -35,34 +35,46 @@ def add_vehicle(connection, vin, make, model, year, instock):
 def find_vehicle(connection, vin):
 	cur = connection.cursor()
 	#look up vehicle
-	vin = ""
-	make = ""
-	model = ""
-	year = ""
 	find ="""SELECT * FROM Vehicle WHERE VIN = %s;"""
 	attr = (vin, )
 	cur.execute(find, attr)
 	return cur.fetchone()
 
-def find_all_vehicles(connection):
+def find_all_vehicles(connection, make=None, model=None, year=None):
 	cur = connection.cursor()
-	find = """SELECT * FROM Vehicle"""
-	cur.execute(find)
-	return cur.fetchall()
+	if make is None and model is None and year is None:
+		find = """SELECT * FROM Vehicle"""
+		cur.execute(find)
+		return cur.fetchall()
+	else:
+		find = """SELECT * FROM Vehicle WHERE Make = %s OR Model = %s OR year = %s"""
+		attr = (make, model, year)
+		cur.execute(find, attr)
+		return cur.fetchall()
 
-def find_Instock(connection, vin):
+def find_Instock(connection, vin=None):
 	cur = connection.cursor()
-	find = """SELECT * FROM Instock WHERE VIN = %s;"""
-	value = (vin,)
-	cur.execute(find, value)
-	return cur.fetchone()
+	if vin is None:
+		find = """SELECT * FROM Vehicle"""
+		cur.execute(find)
+		return cur.fetchall()
+	else:
+		find = """SELECT * FROM Instock WHERE VIN = %s;"""
+		value = (vin,)
+		cur.execute(find, value)
+		return cur.fetchone()
 
-def find_BackOrder(connection, vin):
+def find_BackOrder(connection, vin=None):
 	cur = connection.cursor()
-	find = """SELECT * FROM BackOrder WHERE VIN = %s;"""
-	value = (vin,)
-	cur.execute(find, value)
-	return cur.fetchone()
+	if vin is None:
+		find = """SELECT * FROM BackOrder"""
+		cur.execute(find)
+		return cur.fetchall()
+	else:
+		find = """SELECT * FROM BackOrder WHERE VIN = %s;"""
+		value = (vin,)
+		cur.execute(find, value)
+		return cur.fetchone()
 
 def delete_vehicle(connection, vin):
 	cur = connection.cursor()

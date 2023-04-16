@@ -1,5 +1,8 @@
 from backend.db import connect
-from backend.queries.vehicle_queries import *
+#from backend.queries.vehicle_queries import *
+from backend.queries.add_queries import *
+from backend.queries.find_queries import *
+from backend.queries.delete_queries import *
 from tkinter import *
 import tkinter as tk
 from tkinter import StringVar, IntVar, Button, Label, Entry, Toplevel
@@ -59,7 +62,10 @@ class Vehicle_search(Toplevel):
             self.search_result_label.config(text="Vehicle not found.")
 
     def locate_all(self):
-        self.data = find_all_vehicles(self.connection)
+        make = self.make.get()
+        model = self.model.get()
+        year = self.year.get()
+        self.data = find_all_vehicles(self.connection, model, make, year)
 
     def find_instock(self):
         self.data = find_Instock(self.connection, self.vin)
