@@ -12,10 +12,10 @@ class Vehicle_search(Toplevel):
         super().__init__(master = master)
         self.title("Vehicle Search")
         self.geometry("600x600")
-        self.vin =  StringVar()
-        self.make =  StringVar()
-        self.model =  StringVar()
-        self.year =  IntVar()
+        self.vin = StringVar()
+        self.make = StringVar()
+        self.model = StringVar()
+        self.year = IntVar()
         self.connection = connect()
         self.data = None
         self.stock = 0
@@ -41,11 +41,11 @@ class Vehicle_search(Toplevel):
         findVehicle_year_entry.grid(column=1, row=3, pady=(37.5,0), padx=(0, 150))
 
         findVehicle_button = Button(self, text="Find Vehicle", command=self.locate_vehicle)
-        findVehicle_button.grid(column=0, row=4, pady=(37.5,0), padx=(37.5, 0), columnspan = 2)
+        findVehicle_button.grid(column=0, row=4, pady=(37.5,0), padx=(150, 0))
 
          # Add a label to display the search result message
         self.search_result_label = Label(self, text="")
-        self.search_result_label.grid(column=0, row=5, pady=(37.5, 0), columnspan=2)
+        self.search_result_label.grid(column=0, row=5, pady=(37.5, 0))
 
     def locate_vehicle(self):
         vin = self.vin.get()

@@ -7,6 +7,7 @@ from backend.db import connect
 from backend.queries.exteriorQueries import add_exterior, lookup_exterior, delete_exterior
 from frontend.Vehicle_search import *
 import tkinter as tk
+from frontend.Advanced_search import *
 
 #call postgresql connection function from backend
 connection = connect()
@@ -16,9 +17,12 @@ root.title("Vehicle Tracking Service")
 root.geometry("800x600")
 
 def v_search():
-    
     Vehicle_search(root)
-   
+
+def a_search():
+    Advanced_search(root)
+
+
 #move to locate a Vehicle
 
 locate_vehicle_label = tk.Label(root, width=50, text="Do you wish to find a Vehicle?")
@@ -26,6 +30,10 @@ locate_vehicle_label.grid(column=0, row=0, padx=(140, 0), pady=(100, 20))
 locate_vehicle_button = tk.Button(text="Yes", command=v_search)
 locate_vehicle_button.grid(column=1, row=0, pady=(100, 20))
 
+advLocate_vehicle_label = tk.Label(root, width=50, text="Here is an advanced vehicle search.")
+advLocate_vehicle_label.grid(column=0, row=1, padx=(140, 0), pady=(0, 20))
+advLocate_vehicle_button = tk.Button(text="Yes", command=a_search)
+advLocate_vehicle_button.grid(column=1, row=1, pady=(0, 20))
 
 #Buttons and stuff for search functionality
 
