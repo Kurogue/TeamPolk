@@ -30,6 +30,7 @@ def add_vehicle(connection, vin, make, model, year, instock):
 		connection.commit()
 	return 
 '''
+error handling version
 def add_vehicle(connection, vin, make, model, year, instock):
     cur = connection.cursor()
     try:
