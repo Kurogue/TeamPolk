@@ -1,5 +1,5 @@
 # ProTrack Automotive Systems
-Team Polk's final project for Software Engineering Spring 2023. This project focuses on creating an inventory system to keep record of vehicles. This program has a selection of features and functions for the user to interact with the GUI. A user, for instance, can find a particular vehicle with a known vehicle ID in the database. 
+Team Polk's final project for Software Engineering Spring 2023. This project focuses on creating an inventory system to keep record of vehicles for a small company. This program has a selection of features and functions for the user to interact with the GUI. A user, for instance, can find a particular vehicle with a known vehicle ID in the database. 
 
 ### Installation
 [Instructions on how to install and set up the project]
@@ -12,20 +12,18 @@ Team Polk's final project for Software Engineering Spring 2023. This project foc
 2. Enter the search forms and click appropriate buttons to execute the query
 
 ### Dependencies
-
 The dependencies required for this project to work include the following:
-
-[List of external libraries, frameworks, or tools the project requires] <br>
 
 Must have Python3 installed on the system. All remaining dependencies are located in the requirements.txt to get the project running.
 
 ### Database
 [Description of the database schema and any instructions on how to set it up] <br>
 
-The PostgreSQL instance runs on Google Cloud. If you want to modify and access any part of the database, you must be an authenicated user listed for the permissions on Google Cloud.
+The PostgreSQL instance runs on Google Cloud. If you want to modify and access any part of the database, you must be an authenicated user listed for the permissions on Google Cloud. There are currently 24 tables in the database that describe the particular features of a vehicle.
 
 ### License
 [The license under which the project is released]
+MIT license
 
 
 
