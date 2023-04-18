@@ -22,6 +22,8 @@ def v_search():
 def a_search():
     Advanced_search(root)
 
+def add_delete():
+    Vehicle_add_delete(root)
 
 #move to locate a Vehicle
 

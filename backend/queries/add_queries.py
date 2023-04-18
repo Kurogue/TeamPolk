@@ -2,6 +2,7 @@
 # Will deal with mulitple entities and accout for errors
 
 #Add To Vehicle
+'''
 def add_vehicle(connection, vin, make, model, year, instock):
 	cur = connection.cursor()
 	#lookup to make sure the vehicle doesn't exist
@@ -30,22 +31,16 @@ def add_vehicle(connection, vin, make, model, year, instock):
 		connection.commit()
 	return 
 '''
-error handling version
-def add_vehicle(connection, vin, make, model, year, instock):
+#error handling version
+def add_vehicle(connection, vin, make, model, year, mileage, package_id, audio_id, preform_id, instock):
     cur = connection.cursor()
     try:
-        # Check if the vehicle already exists in the database
-        find_query = """SELECT VIN FROM Vehicle WHERE VIN = %s;"""
-        cur.execute(find_query, (vin,))
-        if cur.fetchone() is not None:
-            print("Vehicle already exists in the table") # Print to the console
-            
+		# Check if the vehicle already exists in the database
+		find_query = """SELECT VIN FROM Vehicle WHERE VIN = %s;"""
+		cur.execute(find_query, (vin,))
+		if cur.fetchone() is not None:
+			return
         else:
-            # Insert the new vehicle into the database
-            add_query = """INSERT INTO Vehicle (VIN, Make, Model, Year) VALUES (%s, %s, %s, %s);"""
-            cur.execute(add_query, (vin, make, model, year))
-            
-            # If instock, add to the instock table, otherwise add to backorder table
             if instock == 1:
                 instock_query = """INSERT INTO Instock (VIN, Date, Available) VALUES (%s, %s, %s);"""
                 date = datetime.date.today()
@@ -62,7 +57,40 @@ def add_vehicle(connection, vin, make, model, year, instock):
     except (Exception, psycopg2.DatabaseError) as error:
         print("Error occurred while adding vehicle to database:", error)
         connection.rollback() # Rollback the changes if any error occurs
-'''
+def add_hasInterior(connection, vin, int_id):
+	cur = connection.cursor()
+	add = """INSERT INTO HasInterior (VIN, Interior_id) VALUES (%s, %s);"""
+	cur.execute(add, (vin, int_id))
+	cur.commit()
+	return
+
+def add_hasSafety(connection, vin, safe_id):
+	cur = connection.cursor()
+	add = """INSERT INTO hasSafety (VIN, Safety_id) VALUES (%s, %s);"""
+	cur.execute(add, (vin, safe_id))
+	cur.commit()
+	return
+
+def add_hasWarranty(connection, vin, warr_no):
+	cur = connection.cursor()
+	add = """INSERT INTO hasWarranty (VIN, Warranty_no) VALUES (%s, %s);"""
+	cur.execute(add, (vin, warr_no))
+	cur.commit()
+	return
+
+def add_hasFeature(connection, vin, feat_id):
+	cur = connection.cursor()
+	add = """INSERT INTO hasFeature (VIN, Feature_id) VALUES (%s, %s);"""
+	cur.execute(add, (vin, feat_id))
+	cur.commit()
+	return
+
+def add_hasControl(connection, vin, control_id):
+	cur = connection.cursor()
+	add = """INSERT INTO hasControl (VIN, Control_id) VALUES (%s, %s);"""
+	cur.execute(add, (vin, control_id))
+	cur.commit()
+	return
 #Add Interior 
 def add_interior(connection, int_id, type_, descript, color):
 	cur = connection.cursor()
