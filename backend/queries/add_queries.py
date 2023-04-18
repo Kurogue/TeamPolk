@@ -1,6 +1,7 @@
 # This file will handle all the adding of entries to the db. 
 # Will deal with mulitple entities and accout for errors
-
+import datetime
+import psycopg2
 #Add To Vehicle
 '''
 def add_vehicle(connection, vin, make, model, year, instock):
@@ -35,28 +36,36 @@ def add_vehicle(connection, vin, make, model, year, instock):
 def add_vehicle(connection, vin, make, model, year, mileage, package_id, audio_id, preform_id, instock):
     cur = connection.cursor()
     try:
-		# Check if the vehicle already exists in the database
-		find_query = """SELECT VIN FROM Vehicle WHERE VIN = %s;"""
-		cur.execute(find_query, (vin,))
-		if cur.fetchone() is not None:
-			return
+        # Check if the vehicle already exists in the database
+        find_query = """SELECT VIN FROM Vehicle WHERE VIN = %s;"""
+        cur.execute(find_query, (vin,))
+        if cur.fetchone() is not None:
+            print("Vehicle already exists in the database")
+            return
+
+        # Insert vehicle into Vehicle table
+        insert_query = """INSERT INTO Vehicle (VIN, Make, Model, Year, Mileage, Package_ID, Audio_ID, Preform_ID) 
+                          VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"""
+        cur.execute(insert_query, (vin, make, model, year, mileage, package_id, audio_id, preform_id))
+
+        # Add the vehicle to either the Instock or Backorder table
+        if instock:
+            instock_query = """INSERT INTO Instock (VIN, Date, Available) VALUES (%s, %s, %s);"""
+            date = datetime.date.today()
+            cur.execute(instock_query, (vin, date, True))
+            print("Vehicle added to instock")
         else:
-            if instock == 1:
-                instock_query = """INSERT INTO Instock (VIN, Date, Available) VALUES (%s, %s, %s);"""
-                date = datetime.date.today()
-                cur.execute(instock_query, (vin, date, True))
-                print("Vehicle added to instock")
-            else:
-                backorder_query = """INSERT INTO Backorder (VIN, Date, Available) VALUES (%s, %s, %s);"""
-                date = datetime.date.today()
-                cur.execute(backorder_query, (vin, date, False))
-                print("Vehicle added to backorder")
-        
-        connection.commit() # Commit the changes
-        
+            backorder_query = """INSERT INTO Backorder (VIN, Date, Available) VALUES (%s, %s, %s);"""
+            date = datetime.date.today()
+            cur.execute(backorder_query, (vin, date, False))
+            print("Vehicle added to backorder")
+
+        connection.commit()  # Commit the changes
+
     except (Exception, psycopg2.DatabaseError) as error:
         print("Error occurred while adding vehicle to database:", error)
-        connection.rollback() # Rollback the changes if any error occurs
+        connection.rollback()  # Rollback the changes if any error occurs
+
 def add_hasInterior(connection, vin, int_id):
 	cur = connection.cursor()
 	add = """INSERT INTO HasInterior (VIN, Interior_id) VALUES (%s, %s);"""
@@ -174,7 +183,7 @@ def add_audio(connection, audio_id, type_, descript):
 		return
 	else:
 		add = """INSERT INTO Audio (Audio_id, Type, Description) VALUES (%s, %s, %s);"""
-		data = (int_id, type_, descript)
+		data = (audio_id, type_, descript)
 		cur.execute(add, data)
 		connection.commit()
 	return
