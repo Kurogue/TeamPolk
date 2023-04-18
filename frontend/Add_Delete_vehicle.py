@@ -113,25 +113,25 @@ class Vehicle_add_delete(Toplevel):
         deleteVehicle_button.grid(column=1, row=14, pady=(37.5,0), padx=(150, 0))
     def add_vehicle(self):
         add_vehicle(self.connection, self.vin, self.make, self.model, self.year, self.mileage, self.package_id, self.audio_id, self.preform_id, self.int_id, self.ext_id, self.safe_id, self.warr_no, self.feat_id, self.contr_id, self.stock)
-        self.i_list = int_lst.split(',')
-        self.e_list = ext_lst.split(',')
-        self.s_list = safe_lst.split(',')
-        self.w_list = warr_lst.split(',')
-        self.f_list = feat_lst.split(',')
-        self.c_list = control_lst.split(',')
+        self.i_list = self.int_lst.split(',')
+        self.e_list = self.ext_lst.split(',')
+        self.s_list = self.safe_lst.split(',')
+        self.w_list = self.add_vehiclewarr_lst.split(',')
+        self.f_list = self.feat_lst.split(',')
+        self.c_list = self.control_lst.split(',')
 
-        for i in i_list:
-            add_hasInterior(self.connection, self.vin, int(self.i))
-        for e in e_list;
-            add_hasExterior(self.connection, self.vin, int(self.e))
-        for s in s_list:
-            add_hasSafety(self.connection, self.vin, int(self.s))
-        for w in w_list:
-            add_hasWarrenty(self.connection, self.vin, int(self.w))
-        for f in f_list:
-            add_hasFeature(self.connection, self.vin, int(self.f))
-        for c in c_list:
-            add_hasControl(self.connection, self.vin, int(self.c))
+        for i in self.i_list:
+            add_hasInterior(self.connection, self.vin, int(i))
+        for e in self.e_list:
+            add_hasExterior(self.connection, self.vin, int(e))
+        for s in self.s_list:
+            add_hasSafety(self.connection, self.vin, int(s))
+        for w in self.w_list:
+            add_hasWarranty(self.connection, self.vin, int(w))
+        for f in self.f_list:
+            add_hasFeature(self.connection, self.vin, int(f))
+        for c in self.c_list:
+            add_hasControl(self.connection, self.vin, int(c))
 
     def delete_vehicle(self):
         delete_vehicle(self.connection, self.vin)

@@ -44,7 +44,7 @@ def add_vehicle(connection, vin, make, model, year, mileage, package_id, audio_i
             return
 
         # Insert vehicle into Vehicle table
-        insert_query = """INSERT INTO Vehicle (VIN, Make, Model, Year, Mileage, Package_ID, Audio_ID, Preform_ID) 
+        insert_query = """INSERT INTO vehicle (VIN, Make, Model, Year, Mileage, Package_ID, Audio_ID, Preform_ID) 
                           VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"""
         cur.execute(insert_query, (vin, make, model, year, mileage, package_id, audio_id, preform_id))
 
@@ -52,12 +52,12 @@ def add_vehicle(connection, vin, make, model, year, mileage, package_id, audio_i
         if instock:
             instock_query = """INSERT INTO Instock (VIN, Date, Available) VALUES (%s, %s, %s);"""
             date = datetime.date.today()
-            cur.execute(instock_query, (vin, date, True))
+            cur.execute(instock_query, (vin.get(), date, True))
             print("Vehicle added to instock")
         else:
             backorder_query = """INSERT INTO Backorder (VIN, Date, Available) VALUES (%s, %s, %s);"""
             date = datetime.date.today()
-            cur.execute(backorder_query, (vin, date, False))
+            cur.execute(backorder_query, (vin.get(), date, False))
             print("Vehicle added to backorder")
 
         connection.commit()  # Commit the changes
@@ -70,6 +70,13 @@ def add_hasInterior(connection, vin, int_id):
 	cur = connection.cursor()
 	add = """INSERT INTO HasInterior (VIN, Interior_id) VALUES (%s, %s);"""
 	cur.execute(add, (vin, int_id))
+	cur.commit()
+	return
+
+def add_hasExterior(connection, vin, ext_id):
+	cur = connection.cursor()
+	add = """INSERT INTO hasExterior (VIN, Exterior_id) VALUES (%s, %s);"""
+	cur.execute(add, (vin, ext_id))
 	cur.commit()
 	return
 
