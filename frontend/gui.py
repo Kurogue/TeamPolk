@@ -6,6 +6,7 @@ This is the main file for the frontend of the application. It is used to create 
 from backend.db import connect
 from backend.queries.exteriorQueries import add_exterior, lookup_exterior, delete_exterior
 from frontend.Vehicle_search import *
+from frontend.Add_Delete_vehicle import *
 import tkinter as tk
 from frontend.Advanced_search import *
 
@@ -40,8 +41,8 @@ advLocate_vehicle_button.grid(column=1, row=1, pady=(0, 20))
 #Buttons and stuff for search functionality
 
 #Add commands/functions for add and remove buttons
-addBar = tk.Entry(root)
-addButton = tk.Button(text="Add")
+addBar = tk.Label(root, text="Add/Delete Vehicle")
+addButton = tk.Button(text="Yes", command=add_delete)
 
 removeBar = tk.Entry(root)
 removeButton = tk.Button(text="Remove")

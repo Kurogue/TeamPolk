@@ -33,7 +33,7 @@ def add_vehicle(connection, vin, make, model, year, instock):
 	return 
 '''
 #error handling version
-def add_vehicle(connection, vin, make, model, year, mileage, package_id, audio_id, preform_id, instock):
+def add_vehicle(connection, vin, make, model, year, mileage, package_id, audio_id, preform_id, instock, lot, spot):
     cur = connection.cursor()
     try:
         # Check if the vehicle already exists in the database
@@ -44,13 +44,13 @@ def add_vehicle(connection, vin, make, model, year, mileage, package_id, audio_i
             return
 
         # Insert vehicle into Vehicle table
-        insert_query = """INSERT INTO vehicle (VIN, Make, Model, Year, Mileage, Package_ID, Audio_ID, Preform_ID) 
+        insert_query = """INSERT INTO Vehicle (VIN, Make, Model, Year, Mileage, Package_ID, Audio_ID, Preform_ID) 
                           VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"""
         cur.execute(insert_query, (vin, make, model, year, mileage, package_id, audio_id, preform_id))
 
         # Add the vehicle to either the Instock or Backorder table
         if instock:
-            instock_query = """INSERT INTO Instock (VIN, Date, Available) VALUES (%s, %s, %s);"""
+            instock_query = """INSERT INTO Instock (VIN, Date, Available, Lot, Spot) VALUES (%s, %s, %s, %s, %s);"""
             date = datetime.date.today()
             cur.execute(instock_query, (vin.get(), date, True))
             print("Vehicle added to instock")
