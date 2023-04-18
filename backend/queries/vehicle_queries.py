@@ -6,31 +6,38 @@ import psycopg2
 import datetime
 
 def add_vehicle(connection, vin, make, model, year, instock):
-	cur = connection.cursor()
-	#lookup to make sure the vehicle doesn't exist
-	find = """SELECT VIN FROM Vehicle WHERE VIN = %s;"""
-	data = (vin, )
-	cur.execute(find, data)
-	if cur.fetchone() is None:
-		print("Vehicle Already in Table")
-		return
-	else:
-		add = """INSERT INTO Vehicle (VIN, Make, Model, Year) VALUES (%s, %s, %s, %s);"""
-		car_values = (vin, make, model, year)
-		cur.execute(add, car_values)
-	#add to either the instock list or back order
-	if instock == 1:
-		instock = """INSERT INTO Instock (VIN, Date, Available) VALUES (%s, %s, %s);"""
-		date = datetime.date
-		values =(vin, date, True)
-		cur.execute(instock, values)
-	else:
-		Backorder = """INSERT INTO Backorder (VIN, Date, Available) VALUES (%s, %s, %s);"""
-		date = datetime.date
-		values =(vin, date, False)
-		cur.execute(instock, values)
-	connection.commit()
-	return 
+    cur = connection.cursor()
+    try:
+        #lookup to make sure the vehicle doesn't exist
+        find = """SELECT VIN FROM Vehicle WHERE VIN = %s;"""
+        data = (vin, )
+        cur.execute(find, data)
+        if cur.fetchone() is not None:
+            print("Vehicle Already in Table")
+            return
+        else:
+            add = """INSERT INTO Vehicle (VIN, Make, Model, Year) VALUES (%s, %s, %s, %s);"""
+            car_values = (vin, make, model, year)
+            cur.execute(add, car_values)
+        #add to either the instock list or back order
+        if instock == 1:
+            instock = """INSERT INTO Instock (VIN, Date, Available) VALUES (%s, %s, %s);"""
+            date = datetime.date
+            values =(vin, date, True)
+            cur.execute(instock, values)
+        else:
+            Backorder = """INSERT INTO Backorder (VIN, Date, Available) VALUES (%s, %s, %s);"""
+            date = datetime.date
+            values =(vin, date, False)
+            cur.execute(instock, values)
+        connection.commit()
+    except (Exception, psycopg2.Error) as error:
+        print("Error while adding vehicle to database", error)
+        connection.rollback()
+    finally:
+        cur.close()
+        return 
+ 
 
 def find_vehicle(connection, vin):
 	cur = connection.cursor()

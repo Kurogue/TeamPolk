@@ -1,43 +1,50 @@
 #This file will handle the deletion of entries or relationships from the database
 #Will have to account for the various many to one Or many to many relationships that may need to be checked
 
-#Delete Vehicle
+#Delete Vehicle that also has error handling check for all the other tables that have a relationship with vehicle
 def delete_vehicle(connection, vin):
-	cur = connection.cursor()
-	#lookup to make sure the vehicle doesn't exist
-	find = """SELECT VIN FROM Vehicle WHERE VIN = %s;"""
-	data = (vin,)
-	cur.execute(find, data)
-	if cur.fetchone() is None:
-		#print("Vehicle Not in Table")#Need to print to the window
-		return
-	else:
-		delete_hasInterior(connection, vin)
-		delete_hasExterior(connection, vin)
-		delete_hasFeature(connection, vin)
-		delete_hasSafety(connection, vin)
-		delete_hasWarranty(connection, vin)
-		delete_hasMaintenance(connection, vin)
-		add = """DELETE FROM Vehicle WHERE VIN = %s;"""
-		car_values = (vin,)
-		cur.execute(add, car_values)
-		connection.commit()
-	#check the instock or backorder to remove those too
-	find_instock = """SELECT VIN FROM Instock WHERE VIN = %s;"""
-	cur.execute(find_instock, data)
-	if cur.fetchone() is not None:
-		del_instock = """DELETE FROM Instock WHERE VIN = %s;"""
-		values = (vin,)
-		cur.execute(instock, values)
-		connection.commit()
-	find_backorder = """ SELECT VIN FROM Backorder WHERE VIN = %s;"""
-	cur.execute(find_backorder, data)
-	if cur.fetchone() is not None:
-		backorder = """DELETE FROM Backorder WHERE VIN = %s;"""
-		values =(vin,)
-		cur.execute(backorder, values)
-		connection.commit()
-	return 
+    try:
+        cur = connection.cursor()
+        # lookup to make sure the vehicle doesn't exist
+        find = """SELECT VIN FROM Vehicle WHERE VIN = %s;"""
+        data = (vin,)
+        cur.execute(find, data)
+        if cur.fetchone() is None:
+            # print("Vehicle Not in Table") # Need to print to the window
+            return
+        else:
+            delete_hasInterior(connection, vin)
+            delete_hasExterior(connection, vin)
+            delete_hasFeature(connection, vin)
+            delete_hasSafety(connection, vin)
+            delete_hasWarranty(connection, vin)
+            delete_hasMaintenance(connection, vin)
+            add = """DELETE FROM Vehicle WHERE VIN = %s;"""
+            car_values = (vin,)
+            cur.execute(add, car_values)
+            connection.commit()
+            # check the instock or backorder to remove those too
+            find_instock = """SELECT VIN FROM Instock WHERE VIN = %s;"""
+            cur.execute(find_instock, data)
+            if cur.fetchone() is not None:
+                del_instock = """DELETE FROM Instock WHERE VIN = %s;"""
+                values = (vin,)
+                cur.execute(instock, values)
+                connection.commit()
+            find_backorder = """ SELECT VIN FROM Backorder WHERE VIN = %s;"""
+            cur.execute(find_backorder, data)
+            if cur.fetchone() is not None:
+                backorder = """DELETE FROM Backorder WHERE VIN = %s;"""
+                values = (vin,)
+                cur.execute(backorder, values)
+                connection.commit()
+            return
+    except Exception as e:
+        print("Error deleting vehicle:", e)
+        return
+    finally:
+        connection.close()
+
 def delete_hasInterior(connection, vin):
 	cur = connection.cursor()
 	find = """SELECT * FROM hasInterior WHERE VIN = %s"""

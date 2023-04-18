@@ -348,8 +348,12 @@ def find_customer(connection, name=None, email=None):
 	return cur.fetchone()
 
 #Find All Customers
-def find_all_customer(connection):
-	cur = connection.cursor()
-	find ="""SELECT * FROM Customer;"""
-	cur.execute(find)
-	return cur.fetchall()
+#Error handling check 
+def find_all_customers(connection):
+    try:
+        cur = connection.cursor()
+        find = """SELECT * FROM Customer;"""
+        cur.execute(find)
+        return cur.fetchall()
+    except Exception as e:
+        print(f"Error while trying to find all customers: {e}")
