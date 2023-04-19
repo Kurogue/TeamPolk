@@ -213,7 +213,7 @@ def delete_audio(connection, audio_id, type_):
 		return
 	else:
 		delete = """DELETE FROM Audio WHERE Audio_id = %s AND Type = %s;"""
-		data = (int_id, type_)
+		data = (audio_id, type_)
 		cur.execute(delete, data)
 		connection.commit()
 	return
@@ -242,7 +242,7 @@ def delete_control(connection, control_id, type_):
 	if cur.fetchone() is None:
 		return
 	else:
-		delete_HasControl(connection, None, control_id)
+		delete_hasControl(connection, None, control_id)
 		delete = """DELETE FROM Control WHERE Control_id = %s AND Type = %s;"""
 		del_data = (control_id, type_,)
 		cur.execute(delete, del_data)
