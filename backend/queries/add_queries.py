@@ -107,6 +107,14 @@ def add_hasControl(connection, vin, control_id):
 	cur.execute(add, (vin, control_id,))
 	connection.commit()
 	return
+
+def add_hasMaintenance(connection, vin, main_no):
+	cur = connection.cursor()
+	add = """INSERT INTO HasMaintence (VIN, Main_no) VALUES (%s, %s);"""
+	cur.execute(add, (vin, main_no,))
+	connection.commit()
+	return
+
 #Add Interior 
 def add_interior(connection, int_id, type_, descript, color):
 	cur = connection.cursor()
