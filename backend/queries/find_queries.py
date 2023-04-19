@@ -343,7 +343,7 @@ def find_all_sales(connection):
 def find_customer(connection, name=None, email=None):
 	cur = connection.cursor()
 	find ="""SELECT * FROM Customer WHERE Customer_name = %s AND Customer_email = %s;"""
-	attr = (main_no)
+	attr = (find)
 	cur.execute(find, attr)
 	return cur.fetchone()
 
@@ -357,3 +357,17 @@ def find_all_customers(connection):
         return cur.fetchall()
     except Exception as e:
         print(f"Error while trying to find all customers: {e}")
+
+def locate_vehicle(self):
+    vin = self.vin.get()
+    make = self.make.get()
+    model = self.model.get()
+    year = self.year.get()
+
+    vehicle = find_vehicle(self.connection, vin)
+
+    if vehicle:
+        vehicle_info = f"Vehicle found:\nVIN: {vehicle[0]}\nMake: {vehicle[1]}\nModel: {vehicle[2]}\nYear: {vehicle[3]}"
+        self.search_result_label.config(text=vehicle_info)
+    else:
+        self.search_result_label.config(text="Vehicle not found.")

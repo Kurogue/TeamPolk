@@ -104,3 +104,21 @@ def check_backorder(connection):
 	getBackOrder = """SELECT * FROM BackOrder"""
 	cur.execute(getBackOrder)
 	return cur.fetchall()
+
+def locate_all(self):
+    make = self.make.get()
+    model = self.model.get()
+    year = self.year.get()
+    self.data = find_all_vehicles(self.connection, model, make, year)
+
+def find_instock(self):
+    self.data = find_Instock(self.connection, self.vin)
+
+def find_onbackorder(self):
+    self.data = find_BackOrder(self.connection, self.vin)
+
+def check_instock(self):
+    self.data = check_inStock(self.connection)
+
+def check_onbackorder(self):
+    self.data = check_backorder(self.connection)

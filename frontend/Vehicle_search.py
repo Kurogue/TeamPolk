@@ -61,25 +61,4 @@ class Vehicle_search(Toplevel):
         else:
             self.search_result_label.config(text="Vehicle not found.")
 
-    def locate_all(self):
-        make = self.make.get()
-        model = self.model.get()
-        year = self.year.get()
-        self.data = find_all_vehicles(self.connection, model, make, year)
 
-    def find_instock(self):
-        self.data = find_Instock(self.connection, self.vin)
-
-    def find_onbackorder(self):
-        self.data = find_BackOrder(self.connection, self.vin)
-
-    def check_instock(self):
-        self.data = check_inStock(self.connection)
-
-    def check_onbackorder(self):
-        self.data = check_backorder(self.connection)
-
-    def add_vehicle(self):
-        add_vehicle(self.connection, self.vin, self.make, self.model, self.year, self.stock)
-    def delete_vehicle(self):
-        delete_vehicle(self.connection, self.vin)
