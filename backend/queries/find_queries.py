@@ -5,7 +5,78 @@
 def find_vehicle(connection, vin):
 	cur = connection.cursor()
 	#look up vehicle
-	find ="""SELECT * FROM Vehicle WHERE VIN = %s;"""
+	find ="""SELECT VIN, Make, Model, Year, Mileage FROM Vehicle WHERE VIN = %s;"""
+	attr = (vin,)
+	cur.execute(find, attr)
+	return cur.fetchone()
+#vehicle-interior
+def find_vehicle_interior(connection, vin=None):
+	cur = connection.cursor()
+	#look up vehicle
+	find ="""SELECT Type, description FROM Vehicle NATURAL JOIN HasInterior NATURAL JOIN Interior WHERE VIN = %s;"""
+	attr = (vin,)
+	cur.execute(find, attr)
+	return cur.fetchall()
+#vehicle-exterior
+def find_vehicle_exterior(connection, vin=None):
+	cur = connection.cursor()
+	find ="""SELECT Type, description FROM Vehicle NATURAL JOIN HasExterior NATURAL JOIN Exterior WHERE VIN = %s;"""
+	attr = (vin,)
+	cur.execute(find, attr)
+	return cur.fetchall()
+#vehicle-control
+def find_vehicle_control(connection, vin=None):
+	cur = connection.cursor()
+	find ="""SELECT Type, description FROM Vehicle NATURAL JOIN HasControls NATURAL JOIN Control WHERE VIN = %s;"""
+	attr = (vin,)
+	cur.execute(find, attr)
+	return cur.fetchall()
+#vehicle-features
+def find_vehicle_features(connection, vin=None):
+	cur = connection.cursor()
+	find ="""SELECT Name, description FROM Vehicle NATURAL JOIN HasFeatures NATURAL JOIN Feature WHERE VIN = %s;"""
+	attr = (vin,)
+	cur.execute(find, attr)
+	return cur.fetchall()
+#vehicle-maintenance
+def find_vehicle_maintenance(connection, vin=None):
+	cur = connection.cursor()
+	find ="""SELECT Date, Service FROM Vehicle NATURAL JOIN HasMaintence NATURAL JOIN Maintenance WHERE VIN = %s;"""
+	attr = (vin,)
+	cur.execute(find, attr)
+	return cur.fetchall()
+#vehicle-safety
+def find_vehicle_safety(connection, vin=None):
+	cur = connection.cursor()
+	find ="""SELECT Name, description FROM Vehicle NATURAL JOIN HasSafety NATURAL JOIN Safety WHERE VIN = %s;"""
+	attr = (vin,)
+	cur.execute(find, attr)
+	return cur.fetchall()
+#vehicle-warranties
+def find_vehicle_warranties(connection, vin=None):
+	cur = connection.cursor()
+	find ="""SELECT Type, description FROM Vehicle NATURAL JOIN HasWarranties NATURAL JOIN Warranty WHERE VIN = %s;"""
+	attr = (vin,)
+	cur.execute(find, attr)
+	return cur.fetchall()
+#vehicle-audio
+def find_vehicle_audio(connection, vin=None):
+	cur = connection.cursor()
+	find ="""SELECT Type, description FROM Vehicle NATURAL JOIN Audio WHERE VIN = %s;"""
+	attr = (vin,)
+	cur.execute(find, attr)
+	return cur.fetchone()
+#vehicle-preformance
+def find_vehicle_preformance(connection, vin=None):
+	cur = connection.cursor()
+	find ="""SELECT Type, description FROM Vehicle INNER JOIN Performance ON perform_id = preform_id WHERE VIN = %s;"""
+	attr = (vin,)
+	cur.execute(find, attr)
+	return cur.fetchone()
+#vehicle-package
+def find_vehicle_package(connection, vin=None):
+	cur = connection.cursor()
+	find ="""SELECT Name, description FROM Vehicle NATURAL JOIN Package WHERE VIN = %s;"""
 	attr = (vin,)
 	cur.execute(find, attr)
 	return cur.fetchone()
@@ -14,11 +85,11 @@ def find_vehicle(connection, vin):
 def find_all_vehicles(connection, make=None, model=None, year=None):
 	cur = connection.cursor()
 	if make is None and model is None and year is None:
-		find = """SELECT * FROM Vehicle"""
+		find = """SELECT VIN, Make, Model, Year, Mileage FROM Vehicle"""
 		cur.execute(find)
 		return cur.fetchall()
 	else:
-		find = """SELECT * FROM Vehicle WHERE Make = %s OR Model = %s OR year = %s;"""
+		find = """SELECT VIN, Make, Model, Year, Mileage FROM Vehicle WHERE Make = %s OR Model = %s OR year = %s;"""
 		attr = (make, model, year,)
 		cur.execute(find, attr)
 		return cur.fetchall()
@@ -27,7 +98,7 @@ def find_all_vehicles(connection, make=None, model=None, year=None):
 def find_sold_vehicles(connection):
 	cur = connection.cursor()
 	#look up vehicle
-	find ="""SELECT * FROM Vehicle WHERE Customer_name IS NOT NULL AND Customer_email IS NOT NULL;"""
+	find ="""SELECT VIN, Make, Model, Year, Mileage, Customer_name, Customer_email FROM Vehicle WHERE Customer_name IS NOT NULL AND Customer_email IS NOT NULL;"""
 	cur.execute(find)
 	return cur.fetchall()
 
@@ -35,7 +106,7 @@ def find_sold_vehicles(connection):
 def find_Instock(connection, vin=None):
 	cur = connection.cursor()
 	if vin is None:
-		find = """SELECT * FROM Vehicle"""
+		find = """SELECT * FROM Instock"""
 		cur.execute(find)
 		return cur.fetchall()
 	else:

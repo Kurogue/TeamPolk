@@ -49,7 +49,7 @@ def add_vehicle(connection, vin, make, model, year, mileage, package_id, audio_i
         cur.execute(insert_query, (vin, make, model, year, mileage, package_id, audio_id, preform_id,))
 
         # Add the vehicle to either the Instock or Backorder table
-        if instock:
+        if instock == 'yes':
             instock_query = """INSERT INTO Instock (VIN, Date_added, Available, Lot, Spot) VALUES (%s, %s, %s, %s, %s);"""
             date = datetime.date.today()
             cur.execute(instock_query, (vin, date, True, lot, spot,))
@@ -96,14 +96,14 @@ def add_hasWarranty(connection, vin, warr_no):
 
 def add_hasFeature(connection, vin, feat_id):
 	cur = connection.cursor()
-	add = """INSERT INTO hasFeature (VIN, Feature_id) VALUES (%s, %s);"""
+	add = """INSERT INTO hasFeatures (VIN, Feature_id) VALUES (%s, %s);"""
 	cur.execute(add, (vin, feat_id,))
 	connection.commit()
 	return
 
 def add_hasControl(connection, vin, control_id):
 	cur = connection.cursor()
-	add = """INSERT INTO hasControl (VIN, Control_id) VALUES (%s, %s);"""
+	add = """INSERT INTO hasControls (VIN, Control_id) VALUES (%s, %s);"""
 	cur.execute(add, (vin, control_id,))
 	connection.commit()
 	return

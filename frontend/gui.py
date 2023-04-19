@@ -6,6 +6,8 @@ from backend.queries.exteriorQueries import add_exterior, lookup_exterior, delet
 from frontend.Vehicle_search import *
 from frontend.Add_Delete_vehicle import *
 from frontend.Advanced_search import *
+from backend.queries.find_queries import *
+import datetime
 from PIL import ImageTk, Image
 
 connection = connect()
@@ -76,9 +78,17 @@ addButton.grid(column=1, row=5, padx=10, pady=(0, 20))
 
 removeBar.grid(column=0, row=6, padx=(400, 0), pady=(0, 20))
 removeButton.grid(column=1, row=6, padx=10, pady=(0, 20))
+instock = find_Instock(connection)
+instock_list = tk.Listbox(root, width=80, height=20)
+instock_list.grid(column=0, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+for item in instock:
+    instock_list.insert(tk.END, item)
 
-my_list = tk.Listbox(root, width=80, height=20)
-my_list.grid(column=0, row=7, padx=(312, 0), pady=(10, 0), columnspan=2)
+backorder = find_BackOrder(connection)
+backorder_list = tk.Listbox(root, width=80, height=20)
+backorder_list.grid(column=3, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+for item in backorder:
+    backorder_list.insert(tk.END, item)
 
 def run_app():
     root.mainloop()

@@ -48,25 +48,25 @@ def delete_vehicle(connection, vin):
 
 def delete_hasInterior(connection, vin=None, int_id=None):
 	cur = connection.cursor()
-	find = """SELECT * FROM hasInterior WHERE VIN = %s;"""
-	cur.execute(find, (vin,))
+	find = """SELECT * FROM hasInterior WHERE VIN = %s OR Interior_id = %s;"""
+	cur.execute(find, (vin, int_id,))
 	if cur.fetchall() is None:
 		return
 	else:
-		delete = """DELETE FROM HasInterior WHERE VIN = %s;"""
-		cur.execute(delete, (vin,))
+		delete = """DELETE FROM HasInterior WHERE VIN = %s OR Interior_id = %s;"""
+		cur.execute(delete, (vin, int_id,))
 		connection.commit()
 		return
 
 def delete_hasExterior(connection, vin=None, ext_id=None):
 	cur = connection.cursor()
-	find = """SELECT * FROM hasExterior WHERE VIN = %s OR Exterior_id = %;s"""
+	find = """SELECT * FROM hasExterior WHERE VIN = %s OR Exterior_id = %s;"""
 	cur.execute(find, (vin, ext_id,))
 	if cur.fetchall() is None:
 		return
 	else:
 		delete = """DELETE FROM HasExterior WHERE VIN = %s OR Exterior_id = %s;"""
-		cur.execute(delete, (vin,))
+		cur.execute(delete, (vin, ext_id,))
 		connection.commit()
 		return
 
@@ -85,7 +85,7 @@ def delete_hasSafety(connection, vin=None, s_id=None):
 def delete_hasWarranty(connection, vin=None, w_no=None):
 	cur = connection.cursor()
 	find = """SELECT * FROM hasWarranties WHERE VIN = %s OR Warranty_no = %s;"""
-	cur.execute(find, (vin, w_no))
+	cur.execute(find, (vin, w_no,))
 	if cur.fetchall() is None:
 		return
 	else:
@@ -120,12 +120,12 @@ def delete_hasMaintenance(connection, vin=None, main_no=None):
 
 def delete_hasControl(connection, vin=None, c_id=None):
 	cur = connection.cursor()
-	find = """SELECT * FROM hasControl WHERE VIN = %s OR Control_id = %s;"""
+	find = """SELECT * FROM hasControls WHERE VIN = %s OR Control_id = %s;"""
 	cur.execute(find, (vin, c_id,))
 	if cur.fetchall() is None:
 		return
 	else:
-		delete = """DELETE FROM hasControl WHERE VIN = %s OR Control_id = %s;"""
+		delete = """DELETE FROM hasControls WHERE VIN = %s OR Control_id = %s;"""
 		cur.execute(delete, (vin, c_id,))
 		connection.commit()
 		return

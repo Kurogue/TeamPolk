@@ -49,18 +49,94 @@ class Vehicle_search(Toplevel):
         findVehicle_button = Button(form_frame, text="Find Vehicle", command=self.locate_vehicle)
         findVehicle_button.grid(column=0, row=4, pady=(10, 10))
 
+        self.interior = find_vehicle_interior(self.connection)
+        self.interior_list = tk.Listbox(form_frame, width=20, height=20)
+        self.interior_list.grid(column=0, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+
+        self.exterior = find_vehicle_exterior(self.connection)
+        self.exterior_list = tk.Listbox(form_frame, width=20, height=20)
+        self.exterior_list.grid(column=0, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+
+        self.control = find_vehicle_control(self.connection)
+        self.control_list = tk.Listbox(form_frame, width=20, height=20)
+        self.control_list.grid(column=1, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+
+        self.features = find_vehicle_features(self.connection)
+        self.features_list = tk.Listbox(form_frame, width=20, height=20)
+        self.features_list.grid(column=2, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+
+        self.maintenance = find_vehicle_maintenance(self.connection)
+        self.maintenance_list = tk.Listbox(form_frame, width=20, height=20)
+        self.maintenance_list.grid(column=3, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+
+        self.safety = find_vehicle_safety(self.connection)
+        self.safety_list = tk.Listbox(form_frame, width=20, height=20)
+        self.safety_list.grid(column=4, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+
+        self.warranty = find_vehicle_warranties(self.connection)
+        self.warranty_list = tk.Listbox(form_frame, width=20, height=20)
+        self.warranty_list.grid(column=5, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+
+        self.audio = find_vehicle_audio(self.connection)
+        self.audio_list = tk.Listbox(form_frame, width=20, height=20)
+        self.audio_list.grid(column=6, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+
+        self.preform = find_vehicle_preformance(self.connection)
+        self.preform_list = tk.Listbox(form_frame, width=20, height=20)
+        self.preform_list.grid(column=7, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+
+        self.package = find_vehicle_package(self.connection)
+        self.package_list = tk.Listbox(form_frame, width=20, height=20)
+        self.package_list.grid(column=8, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
         # Add a label to display the search result message
         self.search_result_label = Label(form_frame, text="", bg='#36454F', fg='white', font=("Arial", 16, "bold"), width=20)
         self.search_result_label.grid(column=0, row=5, pady=(10, 10))
 
     def locate_vehicle(self):
         vin = self.vin.get()
-        make = self.make.get()
-        model = self.model.get()
-        year = self.year.get()
 
         vehicle = find_vehicle(self.connection, vin)
 
+        self.interior = find_vehicle_interior(self.connection, vin)
+        if self.interior is not None:
+            for item in self.interior:
+                self.interior_list.insert(tk.END, item)
+        self.exterior = find_vehicle_exterior(self.connection, vin)
+        if self.exterior is not None:
+            for item in self.exterior:
+                self.exterior_list.insert(tk.END, item)
+        self.control = find_vehicle_control(self.connection, vin)
+        if self.control is not None:
+            for item in self.control:
+                self.control_list.insert(tk.END, item)
+        self.features = find_vehicle_features(self.connection, vin)
+        if self.features is not None:
+            for item in self.features:
+                self.features_list.insert(tk.END, item)
+        self.maintenance = find_vehicle_maintenance(self.connection, vin)
+        if self.maintenance is not None:
+            for item in self.maintenance:
+                self.maintenance_list.insert(tk.END, item)
+        self.safety = find_vehicle_safety(self.connection)
+        if self.safety is not None:
+            for item in self.safety:
+                self.safety_list.insert(tk.END, item)
+        self.warranty = find_vehicle_warranties(self.connection)
+        if self.warranty is not None:
+            for item in self.warranty:
+                self.warranty_list.insert(tk.END, item)
+        self.audio = find_vehicle_audio(self.connection)
+        if self.audio is not None:
+            for item in self.audio:
+                self.audio_list.insert(tk.END, item)
+        self.package = find_vehicle_package(self.connection)
+        if self.package is not None:
+            for item in self.package:
+                self.package_list.insert(tk.END, item)
+        self.preform = find_vehicle_preformance(self.connection)
+        if self.preform is not None:
+            for item in self.preform:
+                self.preform_list.insert(tk.END, item)
         if vehicle:
             vehicle_info = f"Vehicle found:\nVIN: {vehicle[0]}\nMake: {vehicle[1]}\nModel: {vehicle[2]}\nYear: {vehicle[3]}"
             self.search_result_label.config(text=vehicle_info)
