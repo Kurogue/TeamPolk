@@ -16,10 +16,9 @@ Team Polk's final project for Software Engineering Spring 2023. This project foc
 ### Dependencies
 The dependencies required for this project to work include the following:
 
-Must have Python3 installed on the system. All remaining dependencies are located in the requirements.txt to get the project running.
+Must have Python3 installed on the system. All remaining dependencies are located in the requirements.txt to get the project running. As for tkinter, that is a package that already comes when installing Python
 
 ### Database
-[Description of the database schema and any instructions on how to set it up] <br>
 
 The PostgreSQL instance runs on Google Cloud. If you want to modify and access any part of the database, you must be an authenicated user listed for the permissions on Google Cloud. There are currently 24 tables in the database that describe the particular features of a vehicle.
 
