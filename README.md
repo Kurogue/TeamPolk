@@ -1,3 +1,5 @@
+![Logo of ProTrack Automotive Systems](https://user-images.githubusercontent.com/66132436/232945181-891ce761-50df-4637-bfa8-6dddeeee5a87.png)
+
 # ProTrack Automotive Systems
 Team Polk's final project for Software Engineering Spring 2023. This project focuses on creating an inventory system to keep record of vehicles for a small company. This program has a selection of features and functions for the user to interact with the GUI. A user, for instance, can find a particular vehicle with a known vehicle ID in the database. 
 
@@ -24,6 +26,3 @@ The PostgreSQL instance runs on Google Cloud. If you want to modify and access a
 ### License
 [The license under which the project is released]
 MIT license
-
-
-
