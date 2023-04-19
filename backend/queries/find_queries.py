@@ -6,7 +6,7 @@ def find_vehicle(connection, vin):
 	cur = connection.cursor()
 	#look up vehicle
 	find ="""SELECT * FROM Vehicle WHERE VIN = %s;"""
-	attr = (vin)
+	attr = (vin,)
 	cur.execute(find, attr)
 	return cur.fetchone()
 
@@ -19,7 +19,7 @@ def find_all_vehicles(connection, make=None, model=None, year=None):
 		return cur.fetchall()
 	else:
 		find = """SELECT * FROM Vehicle WHERE Make = %s OR Model = %s OR year = %s;"""
-		attr = (make, model, year)
+		attr = (make, model, year,)
 		cur.execute(find, attr)
 		return cur.fetchall()
 
@@ -40,7 +40,7 @@ def find_Instock(connection, vin=None):
 		return cur.fetchall()
 	else:
 		find = """SELECT * FROM Instock WHERE VIN = %s;"""
-		value = (vin)
+		value = (vin,)
 		cur.execute(find, value)
 		return cur.fetchone()
 
@@ -53,7 +53,7 @@ def find_BackOrder(connection, vin=None):
 		return cur.fetchall()
 	else:
 		find = """SELECT * FROM BackOrder WHERE VIN = %s;"""
-		value = (vin)
+		value = (vin,)
 		cur.execute(find, value)
 		return cur.fetchone()
 
@@ -61,7 +61,7 @@ def find_BackOrder(connection, vin=None):
 def find_interior(connection, int_id):
 	cur = connection.cursor()
 	find ="""SELECT * FROM Interior WHERE Interior_id = %s;"""
-	attr = (int_id)
+	attr = (int_id,)
 	cur.execute(find, attr)
 	return cur.fetchone()
 #Find All Interior
@@ -73,7 +73,7 @@ def find_all_interiors(connection, type_=None, color=None):
 		return cur.fetchall()
 	else:
 		find = """SELECT * FROM Interior WHERE Type = %s OR Color = %s;"""
-		attr = (type_, color)
+		attr = (type_, color,)
 		cur.execute(find, attr)
 		return cur.fetchall()
 
@@ -81,7 +81,7 @@ def find_all_interiors(connection, type_=None, color=None):
 def find_package(connection, p_id):
 	cur = connection.cursor()
 	find ="""SELECT * FROM Package WHERE Package_id = %s;"""
-	attr = (p_id)
+	attr = (p_id,)
 	cur.execute(find, attr)
 	return cur.fetchone()
 
@@ -94,7 +94,7 @@ def find_all_packages(connection, name=None):
 		return cur.fetchall()
 	else:
 		find = """SELECT * FROM Package WHERE Name = %s;"""
-		attr = (name)
+		attr = (name,)
 		cur.execute(find, attr)
 		return cur.fetchall()
 
@@ -102,7 +102,7 @@ def find_all_packages(connection, name=None):
 def find_preformance(connection, per_id):
 	cur = connection.cursor()
 	find ="""SELECT * FROM Performance WHERE Perform_id = %s;"""
-	attr = (per_id)
+	attr = (per_id,)
 	cur.execute(find, attr)
 	return cur.fetchone()
 
@@ -115,7 +115,7 @@ def find_all_preformance(connection, type_=None):
 		return cur.fetchall()
 	else:
 		find = """SELECT * FROM Performance WHERE Type = %s;"""
-		attr = (type_)
+		attr = (type_,)
 		cur.execute(find, attr)
 		return cur.fetchall()
 
@@ -123,7 +123,7 @@ def find_all_preformance(connection, type_=None):
 def find_safety(connection, s_id):
 	cur = connection.cursor()
 	find ="""SELECT * FROM Safety WHERE Safety_id = %s;"""
-	attr = (s_id)
+	attr = (s_id,)
 	cur.execute(find, attr)
 	return cur.fetchone()
 
@@ -136,7 +136,7 @@ def find_all_safety(connection, name=None):
 		return cur.fetchall()
 	else:
 		find = """SELECT * FROM Safety WHERE name = %s;"""
-		attr = (name)
+		attr = (name,)
 		cur.execute(find, attr)
 		return cur.fetchall()
 
@@ -144,7 +144,7 @@ def find_all_safety(connection, name=None):
 def find_warranty(connection, w_no):
 	cur = connection.cursor()
 	find ="""SELECT * FROM Warranty WHERE Warranty_no = %s;"""
-	attr = (w_no)
+	attr = (w_no,)
 	cur.execute(find, attr)
 	return cur.fetchone()
 
@@ -157,7 +157,7 @@ def find_all_warranty(connection, type_=None):
 		return cur.fetchall()
 	else:
 		find = """SELECT * FROM Warranty WHERE Type = %s;"""
-		attr = (type_)
+		attr = (type_,)
 		cur.execute(find, attr)
 		return cur.fetchall()
 
@@ -165,7 +165,7 @@ def find_all_warranty(connection, type_=None):
 def find_audio(connection, audio_id):
 	cur = connection.cursor()
 	find ="""SELECT * FROM Audio WHERE Audio_id = %s;"""
-	attr = (audio_id)
+	attr = (audio_id,)
 	cur.execute(find, attr)
 	return cur.fetchone()
 
@@ -178,7 +178,7 @@ def find_all_audio(connection, type_=None):
 		return cur.fetchall()
 	else:
 		find = """SELECT * FROM Audio WHERE Type = %s;"""
-		attr = (type_)
+		attr = (type_,)
 		cur.execute(find, attr)
 		return cur.fetchall()
 
@@ -186,7 +186,7 @@ def find_all_audio(connection, type_=None):
 def find_feature(connection, f_id):
 	cur = connection.cursor()
 	find ="""SELECT * FROM Feature WHERE Feature_id = %s;"""
-	attr = (f_id)
+	attr = (f_id,)
 	cur.execute(find, attr)
 	return cur.fetchone()
 
@@ -199,7 +199,7 @@ def find_all_feature(connection, name=None):
 		return cur.fetchall()
 	else:
 		find = """SELECT * FROM Feature WHERE Name = %s;"""
-		attr = (name)
+		attr = (name,)
 		cur.execute(find, attr)
 		return cur.fetchall()
 
@@ -207,7 +207,7 @@ def find_all_feature(connection, name=None):
 def find_controls(connection, con_id):
 	cur = connection.cursor()
 	find ="""SELECT * FROM Control WHERE Control_id = %s;"""
-	attr = (con_id)
+	attr = (con_id,)
 	cur.execute(find, attr)
 	return cur.fetchone()
 
@@ -220,7 +220,7 @@ def find_all_controls(connection, type_=None):
 		return cur.fetchall()
 	else:
 		find = """SELECT * FROM Control WHERE Type = %s;"""
-		attr = (type_)
+		attr = (type_,)
 		cur.execute(find, attr)
 		return cur.fetchall()
 
@@ -228,7 +228,7 @@ def find_all_controls(connection, type_=None):
 def find_exterior(connection, ex_id):
 	cur = connection.cursor()
 	find ="""SELECT * FROM Exterior WHERE Exterior_id = %s;"""
-	attr = (ex_id)
+	attr = (ex_id,)
 	cur.execute(find, attr)
 	return cur.fetchone()
 
@@ -241,7 +241,7 @@ def find_all_exterior(connection, type_=None, color=None):
 		return cur.fetchall()
 	else:
 		find = """SELECT * FROM Exterior WHERE Type = %s OR Color = %s;"""
-		attr = (type_, color)
+		attr = (type_, color,)
 		cur.execute(find, attr)
 		return cur.fetchall()
 
@@ -249,7 +249,7 @@ def find_all_exterior(connection, type_=None, color=None):
 def find_handling(connection, h_id):
 	cur = connection.cursor()
 	find ="""SELECT * FROM Handling WHERE handling_id = %s;"""
-	attr = (h_id)
+	attr = (h_id,)
 	cur.execute(find, attr)
 	return cur.fetchone()
 
@@ -262,7 +262,7 @@ def find_all_handling(connection, type_=None):
 		return cur.fetchall()
 	else:
 		find = """SELECT * FROM Handling WHERE Type = %s;"""
-		attr = (type_)
+		attr = (type_,)
 		cur.execute(find, attr)
 		return cur.fetchall()
 
@@ -270,7 +270,7 @@ def find_all_handling(connection, type_=None):
 def find_maintence(connection, main_no):
 	cur = connection.cursor()
 	find ="""SELECT * FROM Maintenance WHERE Main_no = %s;"""
-	attr = (main_no)
+	attr = (main_no,)
 	cur.execute(find, attr)
 	return cur.fetchone()
 
@@ -283,7 +283,7 @@ def find_all_Maintenance(connection, date=None, service=None):
 		return cur.fetchall()
 	else:
 		find = """SELECT * FROM Maintenance WHERE Date = %s OR Service = %s;"""
-		attr = (date, service)
+		attr = (date, service,)
 		cur.execute(find, attr)
 		return cur.fetchall()
 
@@ -298,7 +298,7 @@ def find_all_interiors(connection, ):
 def find_maintence_employee(connection, e_id=None, fname=None, lname=None):
 	cur = connection.cursor()
 	find ="""SELECT * FROM Maintence_employ WHERE e_id = %s OR (SELECT * FROM Maintence_employ WHERE fname = %s AND lname = %s);"""
-	attr = (e_id, fname, lname)
+	attr = (e_id, fname, lname,)
 	cur.execute(find, attr)
 	return cur.fetchone()
 
@@ -313,7 +313,7 @@ def find_customer(connection):
 def find_manager_employee(connection, e_id=None, fname=None, lname=None):
 	cur = connection.cursor()
 	find ="""SELECT * FROM Manager WHERE e_id = %s OR (SELECT * FROM Manager WHERE fname = %s AND lname = %s);"""
-	attr = (e_id, fname, lname)
+	attr = (e_id, fname, lname,)
 	cur.execute(find, attr)
 	return cur.fetchone()
 
@@ -328,7 +328,7 @@ def find_customer(connection):
 def find_sales_employee(connection, e_id=None, fname=None, lname=None):
 	cur = connection.cursor()
 	find ="""SELECT * FROM Sales_employ WHERE e_id = %s OR (SELECT * FROM Sales_employ WHERE fname = %s AND lname = %s);"""
-	attr = (e_id, fname, lname)
+	attr = (e_id, fname, lname,)
 	cur.execute(find, attr)
 	return cur.fetchone()
 
@@ -343,7 +343,7 @@ def find_all_sales(connection):
 def find_customer(connection, name=None, email=None):
 	cur = connection.cursor()
 	find ="""SELECT * FROM Customer WHERE Customer_name = %s AND Customer_email = %s;"""
-	attr = (main_no)
+	attr = (name, email,)
 	cur.execute(find, attr)
 	return cur.fetchone()
 
