@@ -29,7 +29,7 @@ class Vehicle_search(Toplevel):
         findVehicle_vin = Label(form_frame, text="VIN: ", bg='#36454F', fg='white', font=("Arial", 16, "bold"), width=15)
         findVehicle_vin.grid(column=0, row=0)
         findVehicle_vin_entry = Entry(form_frame, width=30, textvariable=self.vin, font=("Arial", 16, "bold"))  
-        findVehicle_vin_entry.grid(column=1, row=0, pady=(20, 10))
+        findVehicle_vin_entry.grid(column=1, row=0, pady=(10, 10))
 
         findVehicle_make= Label(form_frame, text="Make: ", bg='#36454F',fg='white', font=("Arial", 16, "bold"), width=15)
         findVehicle_make.grid(column=0, row=1)
