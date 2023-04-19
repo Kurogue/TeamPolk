@@ -94,7 +94,17 @@ class Vehicle_search(Toplevel):
 
     def locate_vehicle(self):
         vin = self.vin.get()
-
+        #Clear current list
+        self.interior_list.delete(0,END)
+        self.exterior_list.delete(0,END)
+        self.control_list.delete(0,END)
+        self.features_list.delete(0,END)
+        self.maintenance_list.delete(0,END)
+        self.safety_list.delete(0,END)
+        self.warranty_list.delete(0,END)
+        self.audio_list.delete(0,END)
+        self.preform_list.delete(0,END)
+        self.package_list.delete(0,END)
         vehicle = find_vehicle(self.connection, vin)
 
         self.interior = find_vehicle_interior(self.connection, vin)

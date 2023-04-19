@@ -71,7 +71,7 @@ class Vehicle_add_delete(Toplevel):
         self.year_validation_label.grid(column=1, row=7, pady=(37.5, 0,))
 
         addVehicle_mileage = Label(self, text="Mileage: ")
-        addVehicle_mileage.grid(column=0, row=9, pady=(37.5,0), padx=(150, 0))
+        addVehicle_mileage.grid(column=0, row=8, pady=(37.5,0), padx=(150, 0))
         addVehicle_mileage_entry = tk.Entry(self, width=30, textvariable=self.mileage)
         addVehicle_mileage_entry.grid(column=1, row=8, pady=(37.5,0), padx=(0, 150))
 
@@ -162,12 +162,12 @@ class Vehicle_add_delete(Toplevel):
             year_error = f"YEAR MUST BE in range from 0 to 9999 can't be empty"
             self.year_validation_label.config(text=year_error) 
             return
-        if self.instock.get().lower() != 'yes' or self.instock.get().lower() != 'no':
+        if self.stock.get().lower() != 'yes' and self.stock.get().lower() != 'no':
             instock_error = f"ERROR PLEASE ENTER A YES OR NO"
             self.stock_validation_label.config(text=instock_error)
             return
         else:
-            add_vehicle(self.connection, self.vin.get().upper(), self.make.get(), self.model.get(), self.year.get(), self.mileage.get(), self.package_id.get(), self.audio_id.get(), self.preform_id.get(),  self.stock.get(), self.lot.get(), self.spot.get())
+            add_vehicle(self.connection, self.vin.get().lower(), self.make.get(), self.model.get(), self.year.get(), self.mileage.get(), self.package_id.get(), self.audio_id.get(), self.preform_id.get(),  self.stock.get(), self.lot.get(), self.spot.get())
             self.i_list = self.int_lst.get().split(',')
             self.e_list = self.ext_lst.get().split(',')
             self.s_list = self.safe_lst.get().split(',')
@@ -187,6 +187,7 @@ class Vehicle_add_delete(Toplevel):
                 add_hasFeature(self.connection, self.vin.get(), int(f))
             for c in self.c_list:
                 add_hasControl(self.connection, self.vin.get(), int(c))
+            self.connection = connect() #restablish connection
         
     def delete_vehicle(self):
         delete_vehicle(self.connection, self.vin.get())

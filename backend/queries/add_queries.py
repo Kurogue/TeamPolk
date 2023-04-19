@@ -47,7 +47,7 @@ def add_vehicle(connection, vin, make, model, year, mileage, package_id, audio_i
         insert_query = """INSERT INTO Vehicle (VIN, Make, Model, Year, Mileage, Package_ID, Audio_ID, Preform_ID) 
                           VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"""
         cur.execute(insert_query, (vin, make, model, year, mileage, package_id, audio_id, preform_id,))
-
+		
         # Add the vehicle to either the Instock or Backorder table
         if instock == 'yes':
             instock_query = """INSERT INTO Instock (VIN, Date_added, Available, Lot, Spot) VALUES (%s, %s, %s, %s, %s);"""
@@ -59,7 +59,7 @@ def add_vehicle(connection, vin, make, model, year, mileage, package_id, audio_i
             date = datetime.date.today()
             cur.execute(backorder_query, (vin, date, False))
             print("Vehicle added to backorder")
-
+		
         connection.commit()  # Commit the changes
 
     except (Exception, psycopg2.DatabaseError) as error:
