@@ -19,7 +19,7 @@ def delete_vehicle(connection, vin):
             delete_hasSafety(connection, vin)
             delete_hasWarranty(connection, vin)
             delete_hasMaintenance(connection, vin)
-			delete_hasControl(connection, vin)
+            delete_hasControl(connection, vin)
             add = """DELETE FROM Vehicle WHERE VIN = %s;"""
             car_values = (vin,)
             cur.execute(add, car_values)
@@ -30,7 +30,7 @@ def delete_vehicle(connection, vin):
             if cur.fetchone() is not None:
                 del_instock = """DELETE FROM Instock WHERE VIN = %s;"""
                 values = (vin,)
-                cur.execute(instock, values)
+                cur.execute(del_instock, values)
                 connection.commit()
             find_backorder = """ SELECT VIN FROM Backorder WHERE VIN = %s;"""
             cur.execute(find_backorder, data)
@@ -213,7 +213,7 @@ def delete_audio(connection, audio_id, type_):
 		return
 	else:
 		delete = """DELETE FROM Audio WHERE Audio_id = %s AND Type = %s;"""
-		data = (int_id, type_)
+		data = (audio_id, type_)
 		cur.execute(delete, data)
 		connection.commit()
 	return
@@ -242,7 +242,7 @@ def delete_control(connection, control_id, type_):
 	if cur.fetchone() is None:
 		return
 	else:
-		delete_HasControl(connection, None, control_id)
+		delete_hasControl(connection, None, control_id)
 		delete = """DELETE FROM Control WHERE Control_id = %s AND Type = %s;"""
 		del_data = (control_id, type_,)
 		cur.execute(delete, del_data)
@@ -290,8 +290,8 @@ def delete_maintenance(connection, main_no):
 	else:
 		delete_hasMaintenance(connection,None, main_no)
 		del_delete = """DELETE FROM Maintenance WHERE Main_no = %s;"""
-		data = (main_no, date_time, service, e_id,)
-		cur.execute(del_delete, del_data)
+		data = (main_no,)
+		cur.execute(del_delete, data)
 		connection.commit()
 	return
 
@@ -335,7 +335,7 @@ def delete_sales_employee(connection, e_id=None, ssn=None):
 		return
 	else:
 		delete = """DELETE FROM Sales_employ WHERE Employ_id = %s OR SSN = %s;"""
-		data = (e_id, ssn, fname, lname, start, address,)
+		data = (e_id, ssn,)
 		cur.execute(delete, data)
 		connection.commit()
 	return
