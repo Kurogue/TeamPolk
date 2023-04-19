@@ -233,11 +233,11 @@ class Add_Delete_Accessory(Toplevel):
     def delete_Exterior(self):
         delete_exterior(self.connection, self.ext_id.get(), self.ext_type.get())
     def add_Feature(self):
-        add_feature(self.connection, self.feat_id.get(), self.feat_type.get(), self.feat_desc.get())
+        add_features(self.connection, self.feat_id.get(), self.feat_type.get(), self.feat_desc.get())
     def delete_Feature(self):
-        delete_feature(self.connection, self.feat_id.get(), self.feat_type.get())
+        delete_features(self.connection, self.feat_id.get(), self.feat_type.get())
     def add_Control(self):
-        add_control(self.connection, self.con_id.get(), self.con_type.get(), self.con_desc.get())
+        self.add_control(self.connection, self.con_id.get(), self.con_type.get(), self.con_desc.get())
     def delete_Control(self):
         delete_control(self.connection, self.con_id.get(), self.con_type.get())
     def add_Handling(self):
@@ -249,19 +249,19 @@ class Add_Delete_Accessory(Toplevel):
     def delete_Audio(self):
         delete_audio(self.connection, self.audio_id.get(), self.audio_type.get())
     def add_Preformance(self):
-        add_preformance(self.connection, self.preform_id.get(), self.preform_type.get(), self.preform_desc.get())
+        add_performance(self.connection, self.preform_id.get(), self.preform_type.get(), self.preform_desc.get())
     def delete_Preformance(self):
-        delete_preformance(self.connection, self.preform_id.get(), self.preform_type.get())
+        self.delete_preformance(self.connection, self.preform_id.get(), self.preform_type.get())
     def add_Package(self):
-        add_package(self.connection, self.pack_id.get(), self.pack_type.get(), self.pack_desc.get())
+        self.add_package(self.connection, self.pack_id.get(), self.pack_type.get(), self.pack_desc.get())
     def delete_Package(self):
-        delete_package(self.connection, self.pack_id.get(), self.pack_type.get())
+        self.delete_package(self.connection, self.pack_id.get(), self.pack_type.get())
     def add_Safety(self):
-        add_safety(self.connection, self.safe_id.get(), self.safe_type.get(), self.safe_desc.get())
+        self.add_safe_security(self.connection, self.safe_id.get(), self.safe_type.get(), self.safe_desc.get())
     def delete_Safety(self):
-        delete_safety(self.connection, self.safe_id.get(), self.safe_type.get())
+        self.delete_safe_security(self.connection, self.safe_id.get(), self.safe_type.get())
     def add_Warranty(self):
-        add_warranty(self.connection, self.warr_id.get(), self.warr_type.get(), self.warr_desc.get())
+        self.add_warranty(self.connection, self.warr_id.get(), self.warr_type.get(), self.warr_desc.get())
     def delete_Warranty(self):
-        delete_warranty(self.connection, self.warr_id.get(), self.warr_type.get())
+        self.delete_warranty(self.connection, self.warr_id.get(), self.warr_type.get())
 
