@@ -19,6 +19,7 @@ def delete_vehicle(connection, vin):
             delete_hasSafety(connection, vin)
             delete_hasWarranty(connection, vin)
             delete_hasMaintenance(connection, vin)
+			delete_hasControl(connection, vin)
             add = """DELETE FROM Vehicle WHERE VIN = %s;"""
             car_values = (vin,)
             cur.execute(add, car_values)
@@ -45,9 +46,9 @@ def delete_vehicle(connection, vin):
     finally:
         connection.close()
 
-def delete_hasInterior(connection, vin):
+def delete_hasInterior(connection, vin=None, int_id=None):
 	cur = connection.cursor()
-	find = """SELECT * FROM hasInterior WHERE VIN = %s"""
+	find = """SELECT * FROM hasInterior WHERE VIN = %s;"""
 	cur.execute(find, (vin,))
 	if cur.fetchall() is None:
 		return
@@ -57,65 +58,78 @@ def delete_hasInterior(connection, vin):
 		connection.commit()
 		return
 
-def delete_hasExterior(connection, vin):
+def delete_hasExterior(connection, vin=None, ext_id=None):
 	cur = connection.cursor()
-	find = """SELECT * FROM hasExterior WHERE VIN = %s"""
-	cur.execute(find, (vin,))
+	find = """SELECT * FROM hasExterior WHERE VIN = %s OR Exterior_id = %;s"""
+	cur.execute(find, (vin, ext_id,))
 	if cur.fetchall() is None:
 		return
 	else:
-		delete = """DELETE FROM HasExterior WHERE VIN = %s;"""
+		delete = """DELETE FROM HasExterior WHERE VIN = %s OR Exterior_id = %s;"""
 		cur.execute(delete, (vin,))
 		connection.commit()
 		return
 
-def delete_hasSafety(connection, vin):
+def delete_hasSafety(connection, vin=None, s_id=None):
 	cur = connection.cursor()
-	find = """SELECT * FROM hasSafety WHERE VIN = %s"""
-	cur.execute(find, (vin,))
+	find = """SELECT * FROM hasSafety WHERE VIN = %s OR Safety_id = %s;"""
+	cur.execute(find, (vin, s_id,))
 	if cur.fetchall() is None:
 		return
 	else:
-		delete = """DELETE FROM HasSafety WHERE VIN = %s;"""
-		cur.execute(delete, (vin,))
+		delete = """DELETE FROM HasSafety WHERE VIN = %s OR Safety_id = %s;"""
+		cur.execute(delete, (vin, s_id,))
 		connection.commit()
 		return
 
-def delete_hasWarranty(connection, vin):
+def delete_hasWarranty(connection, vin=None, w_no=None):
 	cur = connection.cursor()
-	find = """SELECT * FROM hasWarranties WHERE VIN = %s"""
-	cur.execute(find, (vin,))
+	find = """SELECT * FROM hasWarranties WHERE VIN = %s OR Warranty_no = %s;"""
+	cur.execute(find, (vin, w_no))
 	if cur.fetchall() is None:
 		return
 	else:
-		delete = """DELETE FROM hasWarranties Where VIN = %s;"""
-		cur.execute(delete, (vin,))
+		delete = """DELETE FROM hasWarranties Where VIN = %s OR Warranty_no = %s;"""
+		cur.execute(delete, (vin, w_no,))
 		connection.commit()
 		return
 
-def delete_hasFeature(connection, vin):
+def delete_hasFeature(connection, vin=None, f_id=None):
 	cur = connection.cursor()
-	find = """SELECT * FROM hasFeatures WHERE VIN = %s"""
-	cur.execute(find, (vin,))
+	find = """SELECT * FROM hasFeatures WHERE VIN = %s OR Feature_id = %s;"""
+	cur.execute(find, (vin, f_id,))
 	if cur.fetchall() is None:
 		return
 	else:
-		delete = """DELETE FROM hasFeatures WHERE VIN = %s;"""
-		cur.execute(delete, (vin,))
+		delete = """DELETE FROM hasFeatures WHERE VIN = %s OR Feature_id = %s;"""
+		cur.execute(delete, (vin, f_id,))
 		connection.commit()
 		return
 
-def delete_hasMaintenance(connection, vin):
+def delete_hasMaintenance(connection, vin=None, main_no=None):
 	cur = connection.cursor()
-	find = """SELECT * FROM hasMaintence WHERE VIN = %s"""
-	cur.execute(find, (vin,))
+	find = """SELECT * FROM hasMaintence WHERE VIN = %s OR Main_no = %s;"""
+	cur.execute(find, (vin, main_no,))
 	if cur.fetchall() is None:
 		return
 	else:
-		delete = """DELETE FROM hasMaintence WHERE VIN = %s;"""
-		cur.execute(delete, (vin,))
+		delete = """DELETE FROM hasMaintence WHERE VIN = %s OR Main_no = %s;"""
+		cur.execute(delete, (vin, main_no,))
 		connection.commit()
 		return
+
+def delete_hasControl(connection, vin=None, c_id=None):
+	cur = connection.cursor()
+	find = """SELECT * FROM hasControl WHERE VIN = %s OR Control_id = %s;"""
+	cur.execute(find, (vin, c_id,))
+	if cur.fetchall() is None:
+		return
+	else:
+		delete = """DELETE FROM hasControl WHERE VIN = %s OR Control_id = %s;"""
+		cur.execute(delete, (vin, c_id,))
+		connection.commit()
+		return
+
 #Delete Interior ###HasInterior
 def delete_interior(connection, int_id, type_):
 	cur = connection.cursor()
@@ -125,16 +139,10 @@ def delete_interior(connection, int_id, type_):
 	if cur.fetchone() is None:
 		return
 	else:
+		delete_hasInterior(connection, None, int_id)
 		delete = """DELETE FROM Interior WHERE Interior_id = %s AND Type = %s;"""
 		del_data = (int_id, type_,)
 		cur.execute(delete, del_data)
-		#Find the HasInterior Table
-		find_Has = """SELECT Interior_id FROM HasInterior WHERE Interior_id = %s;"""
-		cur.execute(find_Has, data)
-		#If any found then delete all that have the same interior id
-		if cur.fetchone() is not None:
-			delete_has = """DELETE FROM HasInterior WHERE Interior_id = %s"""
-			cur.execute(delete_has, data)
 		connection.commit()
 	return
 #Delete Package 
@@ -174,14 +182,10 @@ def delete_safe_security(connection, safety_id, name):
 	if cur.fetchone() is None:
 		return
 	else:
+		delete_hasSafety(connection, None, safety_id)
 		delete = """DELETE FROM Safety WHERE Safety_id = %s AND Name = %s;"""
 		del_data = (safety_id, name)
 		cur.execute(delete, del_data)
-		find_has = """SELECT Safety_id FROM HasSafety WHERE Safety_id = %s;"""
-		cur.execute(find_has, data)
-		if cur.fetchone() is not None:
-			delete_has = """DELETE FROM HasSafety WHERE Safety_id = %s;"""
-			cur.execute(delete_has, data)
 		connection.commit()
 	return
 #Delete Warranty ###HasWarranties
@@ -193,14 +197,10 @@ def delete_warranty(connection, w_no, type_, descript):
 	if cur.fetchone() is None:
 		return
 	else:
+		delete_hasWarranty(connection, None, w_no)
 		delete = """DELETE FROM Warranty WHERE Warranty_no = %s AND Type = %s;"""
 		del_data = (w_no, type_,)
 		cur.execute(delete, del_data)
-		find_has = """SELECT FROM HasWarranty WHERE Warranty_no = %s;"""
-		cur.execute(find_has, data)
-		if cur.fetchone() is not None:
-			delete_has = """DELETE FROM HasWarranty WHERE Warranty_no = %s;"""
-			cur.execute(delete_has, data)
 		connection.commit()
 	return
 #Delete Audio 
@@ -226,14 +226,10 @@ def delete_features(connection, f_id, name):
 	if cur.fetchone() is None:
 		return
 	else:
+		delete_hasFeature(connection, None, f_id)
 		delete = """DELETE FROM Feature WHERE Feature_id = %s AND Name = %s;"""
 		del_data = (f_id, name,)
 		cur.execute(delete, data)
-		find_has = """SELECT Feature_id FROM HasFeature WHERE Feature_id = %s;"""
-		cur.execute(find_has, del_data)
-		if cur.fetchone() is not None:
-			delete_has = """DELETE FROM HasFeature WHERE Feature_id = %s;"""
-			cur.execute(delete_has, data)
 		connection.commit()
 	return
 
@@ -246,14 +242,10 @@ def delete_control(connection, control_id, type_):
 	if cur.fetchone() is None:
 		return
 	else:
+		delete_HasControl(connection, None, control_id)
 		delete = """DELETE FROM Control WHERE Control_id = %s AND Type = %s;"""
 		del_data = (control_id, type_,)
 		cur.execute(delete, del_data)
-		find_has = """SELECT Control_id FROM HasControl WHERE Control_id = %s;"""
-		cur.execute(find_has, data)
-		if cur.fetchone() is not None:
-			delete_has = """DELETE FROM HasControl WHERE Control_id = %s;"""
-			cur.execute(delete_has, data)
 		connection.commit()
 	return
 
@@ -266,6 +258,7 @@ def delete_exterior(connection, exterior_id, type_):
 	if cur.fetchone() is None:
 		return
 	else:
+		delete_hasExterior(connection, None, exterior_id)
 		delete = """DELETE FROM Exterior WHERE Exterior_id = %s AND Type = %s;"""
 		data = (exterior_id, type_,)
 		cur.execute(delete, data)
@@ -295,14 +288,10 @@ def delete_maintenance(connection, main_no):
 	if cur.fetchone() is None:
 		return
 	else:
+		delete_hasMaintenance(connection,None, main_no)
 		del_delete = """DELETE FROM Maintenance WHERE Main_no = %s;"""
 		data = (main_no, date_time, service, e_id,)
 		cur.execute(del_delete, del_data)
-		find_has = """SELECT Main_no FROM HasMaintenance WHERE Main_no = %s;"""
-		cur.execute(find_has, data)
-		if cur.fetchone() is not None:
-			delete_has = """DELETE FROM HasMaintenance WHERE Main_no = %s;"""
-			cur.execute(delete_has, data)
 		connection.commit()
 	return
 
