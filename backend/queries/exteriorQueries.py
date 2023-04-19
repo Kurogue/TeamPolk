@@ -5,7 +5,6 @@ def execute_query(connection, query, data=None):
         else:
             cursor.execute(query)
         connection.commit()
-        return
 
 def add_exterior(connection, exterior_id, type_, description, color):
     query = """
@@ -14,7 +13,6 @@ def add_exterior(connection, exterior_id, type_, description, color):
     """
     data = (exterior_id, type_, description, color)
     execute_query(connection, query, data)
-    return
 
 def lookup_exterior(connection, exterior_id):
     query = "SELECT * FROM Exterior WHERE Exterior_id = %s;"
@@ -26,5 +24,8 @@ def lookup_exterior(connection, exterior_id):
 def delete_exterior(connection, exterior_id):
     query = "DELETE FROM Exterior WHERE Exterior_id = %s;"
     data = (exterior_id,)
-    execute_query(query, data)
-    return
+    try:
+        execute_query(connection, query, data)
+    except:
+        print("Error deleting exterior with ID:", exterior_id)
+        connection.rollback()
