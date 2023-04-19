@@ -13,13 +13,13 @@ def delete_vehicle(connection, vin):
             # print("Vehicle Not in Table") # Need to print to the window
             return
         else:
-            delete_hasInterior(connection, vin)
-            delete_hasExterior(connection, vin)
-            delete_hasFeature(connection, vin)
-            delete_hasSafety(connection, vin)
-            delete_hasWarranty(connection, vin)
-            delete_hasMaintenance(connection, vin)
-			delete_hasControl(connection, vin)
+            delete_hasInterior(connection, vin, None)
+            delete_hasExterior(connection, vin, None)
+            delete_hasFeature(connection, vin, None)
+            delete_hasSafety(connection, vin, None)
+            delete_hasWarranty(connection, vin, None)
+            delete_hasMaintenance(connection, vin, None)
+			delete_hasControl(connection, vin, None)
             add = """DELETE FROM Vehicle WHERE VIN = %s;"""
             car_values = (vin,)
             cur.execute(add, car_values)
@@ -30,7 +30,7 @@ def delete_vehicle(connection, vin):
             if cur.fetchone() is not None:
                 del_instock = """DELETE FROM Instock WHERE VIN = %s;"""
                 values = (vin,)
-                cur.execute(instock, values)
+                cur.execute(del_instock, values)
                 connection.commit()
             find_backorder = """ SELECT VIN FROM Backorder WHERE VIN = %s;"""
             cur.execute(find_backorder, data)
@@ -290,8 +290,7 @@ def delete_maintenance(connection, main_no):
 	else:
 		delete_hasMaintenance(connection,None, main_no)
 		del_delete = """DELETE FROM Maintenance WHERE Main_no = %s;"""
-		data = (main_no, date_time, service, e_id,)
-		cur.execute(del_delete, del_data)
+		cur.execute(del_delete, data)
 		connection.commit()
 	return
 
@@ -335,7 +334,7 @@ def delete_sales_employee(connection, e_id=None, ssn=None):
 		return
 	else:
 		delete = """DELETE FROM Sales_employ WHERE Employ_id = %s OR SSN = %s;"""
-		data = (e_id, ssn, fname, lname, start, address,)
+		data = (e_id, ssn)
 		cur.execute(delete, data)
 		connection.commit()
 	return

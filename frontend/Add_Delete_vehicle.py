@@ -10,8 +10,8 @@ from tkinter import StringVar, IntVar, Button, Label, Entry, Toplevel
 class Vehicle_add_delete(Toplevel):
     def __init__(self, master=None):
         super().__init__(master = master)
-        self.title("Vehicle Search")
-        self.geometry("900x900")
+        self.title("Vehicle Add/Delete")
+        self.geometry("1500x1200")
         self.vin = StringVar()
         self.make = StringVar()
         self.model = StringVar()
