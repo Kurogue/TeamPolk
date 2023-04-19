@@ -13,12 +13,12 @@ def delete_vehicle(connection, vin):
             # print("Vehicle Not in Table") # Need to print to the window
             return
         else:
-            delete_hasInterior(connection, vin)
-            delete_hasExterior(connection, vin)
-            delete_hasFeature(connection, vin)
-            delete_hasSafety(connection, vin)
-            delete_hasWarranty(connection, vin)
-            delete_hasMaintenance(connection, vin)
+            delete_hasInterior(connection, vin, None)
+            delete_hasExterior(connection, vin, None)
+            delete_hasFeature(connection, vin, None)
+            delete_hasSafety(connection, vin, None)
+            delete_hasWarranty(connection, vin, None)
+            delete_hasMaintenance(connection, vin, None)
             delete_hasControl(connection, vin)
             add = """DELETE FROM Vehicle WHERE VIN = %s;"""
             car_values = (vin,)
@@ -242,6 +242,7 @@ def delete_control(connection, control_id, type_):
 	if cur.fetchone() is None:
 		return
 	else:
+		delete_hasControl(connection, None, control_id)
 		delete_hasControl(connection, None, control_id)
 		delete = """DELETE FROM Control WHERE Control_id = %s AND Type = %s;"""
 		del_data = (control_id, type_,)
