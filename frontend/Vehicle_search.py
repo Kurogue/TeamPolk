@@ -26,70 +26,76 @@ class Vehicle_search(Toplevel):
         form_frame.pack(expand=True)
 
         # find Vehicle
-        findVehicle_vin = Label(form_frame, text="VIN: ", bg='#36454F', fg='white', font=("Arial", 16, "bold"), width=20)
+        findVehicle_vin = Label(form_frame, text="VIN: ", bg='#36454F', fg='white', font=("Arial", 16, "bold"), width=15)
         findVehicle_vin.grid(column=0, row=0)
         findVehicle_vin_entry = Entry(form_frame, width=30, textvariable=self.vin, font=("Arial", 16, "bold"))  
-        findVehicle_vin_entry.grid(column=1, row=0, pady=(10, 10))
+        findVehicle_vin_entry.grid(column=1, row=0, pady=(20, 10))
 
-        findVehicle_make= Label(form_frame, text="Make: ", bg='#36454F',fg='white', font=("Arial", 16, "bold"), width=20)
+        findVehicle_make= Label(form_frame, text="Make: ", bg='#36454F',fg='white', font=("Arial", 16, "bold"), width=15)
         findVehicle_make.grid(column=0, row=1)
         findVehicle_make_entry = tk.Entry(form_frame, width=30, textvariable=self.make, font=("Arial", 16, "bold"))
-        findVehicle_make_entry.grid(column=1, row=1, pady=(10, 10))
+        findVehicle_make_entry.grid(column=1, row=1, pady=(20, 10))
 
-        findVehicle_model = Label(form_frame, text="Model: ", bg='#36454F', fg='white', font=("Arial", 16, "bold"), width=20)
+        findVehicle_model = Label(form_frame, text="Model: ", bg='#36454F', fg='white', font=("Arial", 16, "bold"), width=15)
         findVehicle_model.grid(column=0, row=2)
         findVehicle_model_entry = tk.Entry(form_frame, width=30, textvariable=self.model, font=("Arial", 16, "bold"))
-        findVehicle_model_entry.grid(column=1, row=2, pady=(10, 10))
+        findVehicle_model_entry.grid(column=1, row=2, pady=(20, 10))
 
-        findVehicle_year = Label(form_frame, text="Year: ", bg='#36454F', fg='white', font=("Arial", 16, "bold"), width=20)
+        findVehicle_year = Label(form_frame, text="Year: ", bg='#36454F', fg='white', font=("Arial", 16, "bold"), width=15)
         findVehicle_year.grid(column=0, row=3)
         findVehicle_year_entry = tk.Entry(form_frame, width=30, textvariable=self.year, font=("Arial", 16, "bold"))
-        findVehicle_year_entry.grid(column=1, row=3, pady=(10, 10))
+        findVehicle_year_entry.grid(column=1, row=3, pady=(20, 10))
 
         findVehicle_button = Button(form_frame, text="Find Vehicle", command=self.locate_vehicle)
         findVehicle_button.grid(column=0, row=4, pady=(10, 10))
 
+        form_frame.pack(fill=tk.BOTH, expand=True)
+
+        listbox_spacing = 0.1
+        listbox_width = 0.1
+
         self.interior = find_vehicle_interior(self.connection)
-        self.interior_list = tk.Listbox(form_frame, width=20, height=20)
-        self.interior_list.grid(column=0, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+        self.interior_list = tk.Listbox(form_frame, width=10, height=10)
+        self.interior_list.place(relx=0.05, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
 
         self.exterior = find_vehicle_exterior(self.connection)
-        self.exterior_list = tk.Listbox(form_frame, width=20, height=20)
-        self.exterior_list.grid(column=0, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+        self.exterior_list = tk.Listbox(form_frame, width=10, height=10)
+        self.exterior_list.place(relx=0.05 + listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
 
         self.control = find_vehicle_control(self.connection)
-        self.control_list = tk.Listbox(form_frame, width=20, height=20)
-        self.control_list.grid(column=1, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+        self.control_list = tk.Listbox(form_frame, width=10, height=10)
+        self.control_list.place(relx=0.05 + 2 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
 
         self.features = find_vehicle_features(self.connection)
-        self.features_list = tk.Listbox(form_frame, width=20, height=20)
-        self.features_list.grid(column=2, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+        self.features_list = tk.Listbox(form_frame, width=10, height=10)
+        self.features_list.place(relx=0.05 + 3 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
 
         self.maintenance = find_vehicle_maintenance(self.connection)
-        self.maintenance_list = tk.Listbox(form_frame, width=20, height=20)
-        self.maintenance_list.grid(column=3, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+        self.maintenance_list = tk.Listbox(form_frame, width=10, height=10)
+        self.maintenance_list.place(relx=0.05 + 4 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
 
         self.safety = find_vehicle_safety(self.connection)
-        self.safety_list = tk.Listbox(form_frame, width=20, height=20)
-        self.safety_list.grid(column=4, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+        self.safety_list = tk.Listbox(form_frame, width=10, height=10)
+        self.safety_list.place(relx=0.05 + 5 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
 
         self.warranty = find_vehicle_warranties(self.connection)
-        self.warranty_list = tk.Listbox(form_frame, width=20, height=20)
-        self.warranty_list.grid(column=5, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+        self.warranty_list = tk.Listbox(form_frame, width=10, height=10)
+        self.warranty_list.place(relx=0.05 + 6 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
 
         self.audio = find_vehicle_audio(self.connection)
-        self.audio_list = tk.Listbox(form_frame, width=20, height=20)
-        self.audio_list.grid(column=6, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+        self.audio_list = tk.Listbox(form_frame, width=10, height=10)
+        self.audio_list.place(relx=0.05 + 7 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
 
         self.preform = find_vehicle_preformance(self.connection)
-        self.preform_list = tk.Listbox(form_frame, width=20, height=20)
-        self.preform_list.grid(column=7, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+        self.preform_list = tk.Listbox(form_frame, width=10, height=10)
+        self.preform_list.place(relx=0.05 + 8 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
 
         self.package = find_vehicle_package(self.connection)
-        self.package_list = tk.Listbox(form_frame, width=20, height=20)
-        self.package_list.grid(column=8, row=7, padx=(30, 0), pady=(10, 0), columnspan=2)
+        self.package_list = tk.Listbox(form_frame, width=10, height=10)
+        self.package_list.place(relx=0.05 + 9 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
+        
         # Add a label to display the search result message
-        self.search_result_label = Label(form_frame, text="", bg='#36454F', fg='white', font=("Arial", 16, "bold"), width=20)
+        self.search_result_label = Label(form_frame, text="", bg='#36454F', fg='white', font=("Arial", 16, "bold"), width=15)
         self.search_result_label.grid(column=0, row=5, pady=(10, 10))
 
     def locate_vehicle(self):
