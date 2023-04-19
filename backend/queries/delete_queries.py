@@ -189,7 +189,7 @@ def delete_safe_security(connection, safety_id, name):
 		connection.commit()
 	return
 #Delete Warranty ###HasWarranties
-def delete_warranty(connection, w_no, type_, descript):
+def delete_warranty(connection, w_no, type_):
 	cur = connection.cursor()
 	find = """SELECT Warranty_no FROM Warranty WHERE Warranty_no = %s;"""
 	data = (w_no,)
