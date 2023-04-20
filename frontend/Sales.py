@@ -8,14 +8,16 @@ import datetime
 import tkinter as tk 
 from tkinter import StringVar, IntVar, Button, Label, Entry, Toplevel
 
-
-
-class Vehicle_Sells(Toplevel):
+class Add_delete_Sales(Toplevel):
     def __init__(self, master=None):
         super().__init__(master = master)
         self.title("Sales")
-        self.geometry("1500x1200")
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        # Set the geometry of the window to the full size of the screen
+        self.geometry(f"{screen_width}x{screen_height}")
         self.connection = connect()
+        self.configure(bg="#36454F")
         #Parameters to build the maintenance item
         self.vin = StringVar()
         self.c_name = StringVar()
@@ -24,49 +26,43 @@ class Vehicle_Sells(Toplevel):
         self.vin_instock = StringVar()
         self.lot = StringVar()
         self.spot = IntVar()
-        #Build the outline of the customer requirements
-        self.customer_name_label = Label(self, text="Enter Customer Name:")
+        label_bg_color = "#36454F"
+        label_fg_color = "white"
+        font = ("Verdana", 12)
+
+        self.customer_name_label = Label(self, text="Enter Customer Name:", bg=label_bg_color, fg=label_fg_color, font=font)
         self.customer_name_label.grid(column=2, row=2, padx=(30,0), pady=(30,0))
-        self.customer_name_entry = Entry(self, width=30, textvariable=self.c_name)
-        self.customer_name_entry.grid(column=3, row=3, padx=(30,0), pady=(30,0))
-        self.customer_name_label = Label(self, text="Enter Customer Email:")
-        self.customer_name_label.grid(column=2, row=3, padx=(30,0), pady=(30,0))
-        self.customer_name_entry = Entry(self, width=30, textvariable=self.c_email)
-        self.customer_name_entry.grid(column=3, row=3, padx=(30,0), pady=(30,0))
-    
-        self.saleperson_id_label = Label(self, text="Enter your employee id:")
+        self.customer_name_entry = Entry(self, width=30, textvariable=self.c_name, font=font)
+        self.customer_name_entry.grid(column=3, row=2, padx=(30,0), pady=(30,0))
+
+        self.customer_email_label = Label(self, text="Enter Customer Email:", bg=label_bg_color, fg=label_fg_color, font=font)
+        self.customer_email_label.grid(column=2, row=3, padx=(30,0), pady=(30,0))
+        self.customer_email_entry = Entry(self, width=30, textvariable=self.c_email, font=font)
+        self.customer_email_entry.grid(column=3, row=3, padx=(30,0), pady=(30,0))
+
+        self.saleperson_id_label = Label(self, text="Enter your employee id:", bg=label_bg_color, fg=label_fg_color, font=font)
         self.saleperson_id_label.grid(column=2, row=4, padx=(30,0), pady=(30,0))
-        self.saleperson_id_entry = Entry(self, width=30, textvariable=self.e_id)
+        self.saleperson_id_entry = Entry(self, width=30, textvariable=self.e_id, font=font)
         self.saleperson_id_entry.grid(column=3, row=4, padx=(30,0), pady=(30,0))
-    
-        self.vehicle_id_label = Label(self, text="Enter the Vehicle VIN")
+
+        self.vehicle_id_label = Label(self, text="Enter the Vehicle VIN", bg=label_bg_color, fg=label_fg_color, font=font)
         self.vehicle_id_label.grid(column=2, row=5, padx=(30,0), pady=(30,0))
-        self.vehicle_id_entry = Entry(self, width=30, textvariable=self.vin)
+        self.vehicle_id_entry = Entry(self, width=30, textvariable=self.vin, font=font)
         self.vehicle_id_entry.grid(column=3, row=5, padx=(30,0), pady=(30,0))
 
         self.submit_button = Button(self, text="Submit", command=self.make_sale)
         self.submit_button.grid(column=2, row=6, padx=(30,0), pady=(30,0))
 
-        self.arrival_label = Label(self, text="Move BackOrder to Instock?")
+        self.arrival_label = Label(self, text="Move BackOrder to Instock?", bg=label_bg_color, fg=label_fg_color, font=font)
         self.arrival_label.grid(column=5, row=2, padx=(30,0), pady=(30,0))
-        self.arrival_vin_label = Label(self, text="Enter VIN: ")
-        self.arrival_vin_label.grid(column=5, row=3, padx=(30,0), pady=(30,0))
-        self.arrival_vin_entry = Entry(self, width = 30, textvariable=self.vin_instock)
-        self.arrival_vin_entry.grid(column=6, row=3, padx=(30,0), pady=(30,0))
-        
-        self.arrival_vin_label = Label(self, text="Enter Lot ID: ")
-        self.arrival_vin_label.grid(column=5, row=4, padx=(30,0), pady=(30,0))
-        self.arrival_vin_entry = Entry(self, width = 30, textvariable=self.lot)
-        self.arrival_vin_entry.grid(column=6, row=4, padx=(30,0), pady=(30,0))
 
-        self.arrival_vin_label = Label(self, text="Enter Spot #: ")
-        self.arrival_vin_label.grid(column=5, row=5, padx=(30,0), pady=(30,0))
-        self.arrival_vin_entry = Entry(self, width = 30, textvariable=self.spot)
-        self.arrival_vin_entry.grid(column=6, row=5, padx=(30,0), pady=(30,0))
+        self.arrival_vin_label = Label(self, text="Enter VIN: ", bg=label_bg_color, fg=label_fg_color, font=font)
+        self.arrival_vin_label.grid(column=5, row=3, padx=(30,0), pady=(30,0))
+        self.arrival_vin_entry = Entry(self, width=30, textvariable=self.vin_instock, font=font)
+        self.arrival_vin_entry.grid(column=6, row=3, padx=(30,0), pady=(30,0))
 
         self.arrival_vin_entry = Button(self, text="Move Stock", command=self.move_instock)
-        self.arrival_vin_entry.grid(column=7, row=5, padx=(30,0), pady=(30,0))
-
+        self.arrival_vin_entry.grid(column=5, row=6, padx=(30,0), pady=(30,0))
 
     def make_sale(self):
         cur = self.connection.cursor()

@@ -146,5 +146,5 @@ class Advanced_search(Toplevel):
         advSearch_button.grid(column=0, row=14, pady=(30,0), padx=(150, 0), columnspan=4)
 
         #  # Add a label to display the search result message
-        # self.search_result_label = Label(self, text="")
-        # self.search_result_label.grid(column=0, row=6, pady=(37.5, 0))
+        self.search_result_label = Label(self, text="")
+        self.search_result_label.grid(column=0, row=6, pady=(37.5, 0))

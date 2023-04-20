@@ -29,24 +29,24 @@ class Vehicle_search(Toplevel):
         form_frame.pack(expand=True)
 
         # find Vehicle
-        findVehicle_vin = Label(form_frame, text="VIN: ", bg='#36454F', fg='white', font=("Arial", 16, "bold"), width=15)
+        findVehicle_vin = Label(form_frame, text="VIN: ", bg='#36454F', fg='white', font=("Verdana", 12, "bold"), width=15)
         findVehicle_vin.grid(column=0, row=0)
-        findVehicle_vin_entry = Entry(form_frame, width=30, textvariable=self.vin, font=("Arial", 16, "bold"))  
+        findVehicle_vin_entry = Entry(form_frame, width=30, textvariable=self.vin, font=("Verdana", 12, "bold"))  
         findVehicle_vin_entry.grid(column=1, row=0, pady=(10, 10))
 
-        findVehicle_make= Label(form_frame, text="Make: ", bg='#36454F',fg='white', font=("Arial", 16, "bold"), width=15)
+        findVehicle_make= Label(form_frame, text="Make: ", bg='#36454F',fg='white', font=("Verdana", 12, "bold"), width=15)
         findVehicle_make.grid(column=0, row=1)
-        findVehicle_make_entry = tk.Entry(form_frame, width=30, textvariable=self.make, font=("Arial", 16, "bold"))
+        findVehicle_make_entry = tk.Entry(form_frame, width=30, textvariable=self.make, font=("Verdana", 12, "bold"))
         findVehicle_make_entry.grid(column=1, row=1, pady=(20, 10))
 
-        findVehicle_model = Label(form_frame, text="Model: ", bg='#36454F', fg='white', font=("Arial", 16, "bold"), width=15)
+        findVehicle_model = Label(form_frame, text="Model: ", bg='#36454F', fg='white', font=("Verdana", 12, "bold"), width=15)
         findVehicle_model.grid(column=0, row=2)
-        findVehicle_model_entry = tk.Entry(form_frame, width=30, textvariable=self.model, font=("Arial", 16, "bold"))
+        findVehicle_model_entry = tk.Entry(form_frame, width=30, textvariable=self.model, font=("Verdana", 12, "bold"))
         findVehicle_model_entry.grid(column=1, row=2, pady=(20, 10))
 
-        findVehicle_year = Label(form_frame, text="Year: ", bg='#36454F', fg='white', font=("Arial", 16, "bold"), width=15)
+        findVehicle_year = Label(form_frame, text="Year: ", bg='#36454F', fg='white', font=("Verdana", 12, "bold"), width=15)
         findVehicle_year.grid(column=0, row=3)
-        findVehicle_year_entry = tk.Entry(form_frame, width=30, textvariable=self.year, font=("Arial", 16, "bold"))
+        findVehicle_year_entry = tk.Entry(form_frame, width=30, textvariable=self.year, font=("Verdana", 12, "bold"))
         findVehicle_year_entry.grid(column=1, row=3, pady=(20, 10))
 
         findVehicle_button = Button(form_frame, text="Find Vehicle", command=self.locate_vehicle)

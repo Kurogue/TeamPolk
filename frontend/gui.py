@@ -11,6 +11,7 @@ from frontend.Accessories import *
 from frontend.Customer import *
 from frontend.Employee import *
 from frontend.Maintenance import *
+from frontend.Sales import *
 import datetime
 from PIL import ImageTk, Image
 
@@ -66,6 +67,9 @@ def add_employee():
 def add_maintenances():
     Add_delete_Maintenance(root)
 
+def add_sales():
+    Add_delete_Sales(root)
+
 locate_vehicle_label = tk.Label(root, text="Do you wish to find a vehicle?", font=("Verdana", 12), fg="white", bg="#36454F")
 locate_vehicle_label.grid(column=0, row=0, padx=(label_padding, 0), pady=(160, 20))
 locate_vehicle_button = tk.Button(text="Yes", command=v_search, width=7, font=("Verdana", 10, "bold"), bg="white", fg="#36454F")
@@ -103,6 +107,11 @@ MaintenanceBar = tk.Label(root, text="Add/Delete Maintenance", font=("Verdana", 
 MaintenanceBar.grid(column=3, row=1, padx=(label_padding / 2, 0), pady=(0, 20))
 MaintenanceButton = tk.Button(text="Yes", command=add_maintenances, width=7, font=("Verdana", 10, "bold"), bg="white", fg="#36454F")
 MaintenanceButton.grid(column=4, row=1, pady=(0, 20))
+
+SalesBar = tk.Label(root, text="Add/Delete Sales", font=("Verdana", 12), fg="white", bg="#36454F")
+SalesBar.grid(column=3, row=2, padx=(label_padding / 2, 0), pady=(0, 20))
+SalesButton = tk.Button(text="Yes", command=add_sales, width=7, font=("Verdana", 10, "bold"), bg="white", fg="#36454F")
+SalesButton.grid(column=4, row=2, pady=(0, 20))
 
 list_padding = (screen_width - 880) // 2
 
