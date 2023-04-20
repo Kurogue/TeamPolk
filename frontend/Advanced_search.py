@@ -47,104 +47,106 @@ class Advanced_search(Toplevel):
         self.data = None
         self.stock = 0
 
-        # find Vehicle
-        advSearch_vin = Label(self, text="VIN: ", bg="#36454F", fg="white", font=("Verdana", 16))
-        advSearch_vin.grid(column=0, row=0, pady=(30,0), padx=(150, 0))
-        advSearch_vin_entry = Entry(self, width=30, textvariable=self.vin, font=("Verdana", 10))  
-        advSearch_vin_entry.grid(column=1, row=0, pady=(30,0), padx=(0, 150))
+        ###Find Vehicle###
+        # VIN
+        advSearch_vin = Label(self, text="VIN: ", bg="#36454F", fg="white", font=("Verdana", 12))
+        advSearch_vin.grid(column=0, row=0, pady=(10,0), padx=(10, 0), sticky="W")
+        advSearch_vin_entry = Entry(self, width=20, textvariable=self.vin, font=("Verdana", 14))  
+        advSearch_vin_entry.grid(column=0, row=0, pady=(10,0), padx=(60, 0), sticky="W")
 
-        advSearch_make= Label(self, text="Make: ", bg="#36454F", fg="white", font=("Verdana", 16))
-        advSearch_make.grid(column=2, row=0, pady=(30,0), padx=(0, 0))
-        advSearch_make_entry = tk.Entry(self, width=30, textvariable=self.make, font=("Verdana", 10))
-        advSearch_make_entry.grid(column=3, row=0, pady=(30,0), padx=(0, 0))
+        # Make
+        advSearch_make= Label(self, text="Make: ", bg="#36454F", fg="white", font=("Verdana", 12))
+        advSearch_make.grid(column=0, row=1, pady=(0,0), padx=(10, 0), sticky="W")
+        advSearch_make_entry = tk.Entry(self, width=20, textvariable=self.make, font=("Verdana", 14))
+        advSearch_make_entry.grid(column=0, row=1, pady=(0,0), padx=(60, 0), sticky="W")
+        
+        # Model 
+        advSearch_model = Label(self, text="Model: ", bg="#36454F", fg="white", font=("Verdana", 12))
+        advSearch_model.grid(column=0, row=2, pady=(0,0), padx=(10, 0), sticky="W")
+        advSearch_model_entry = tk.Entry(self, width=20, textvariable=self.model, font=("Verdana", 14))
+        advSearch_model_entry.grid(column=0, row=2, pady=(0,0), padx=(60, 0), sticky="W")
 
-        advSearch_model = Label(self, text="Model: ", bg="#36454F", fg="white", font=("Verdana", 16))
-        advSearch_model.grid(column=0, row=1, pady=(10,0), padx=(150, 0))
-        advSearch_model_entry = tk.Entry(self, width=30, textvariable=self.model, font=("Verdana", 10))
-        advSearch_model_entry.grid(column=1, row=1, pady=(10,0), padx=(0, 150))
+        # Year
+        advSearch_year = Label(self, text="Year: ", bg="#36454F", fg="white", font=("Verdana", 12))
+        advSearch_year.grid(column=0, row=3, pady=(0,0), padx=(10, 0), sticky="W")
+        advSearch_year_entry = tk.Entry(self, width=20, textvariable=self.year, font=("Verdana", 14))
+        advSearch_year_entry.grid(column=0, row=3, pady=(0,0), padx=(60, 0), sticky="W")
 
-        advSearch_year = Label(self, text="Year: ", bg="#36454F", fg="white", font=("Verdana", 16))
-        advSearch_year.grid(column=2, row=1, pady=(10,0), padx=(0, 0))
-        advSearch_year_entry = tk.Entry(self, width=30, textvariable=self.year, font=("Verdana", 10))
-        advSearch_year_entry.grid(column=3, row=1, pady=(10,0), padx=(0, 0))
+         ### Interior Features ###
 
-
-        advSearch_transmission = Label(self, text="Transmission: ", bg="#36454F", fg="white", font=("Verdana", 16))
-        advSearch_transmission.grid(column=0, row=2, pady=(10,0), padx=(150, 0))
-        advSearch_transmission_entry = tk.Listbox(self, width=30, height=2, selectmode="single", exportselection=False, font=("Verdana", 10))
-        advSearch_transmission_entry.grid(column=1, row=2, pady=(10,0), padx=(0, 150))
-        for eachItem in range(len(transmissionList)):
-            advSearch_transmission_entry.insert(END, transmissionList[eachItem])
-
-        advSearch_engineType = Label(self, text="Engine Type: ", bg="#36454F", fg="white", font=("Verdana", 16))
-        advSearch_engineType.grid(column=2, row=2, pady=(10,0), padx=(0, 0))
-        advSearch_engineType_entry = tk.Listbox(self, width=30, height=3, selectmode="single", exportselection=False, font=("Verdana", 10))
-        advSearch_engineType_entry.grid(column=3, row=2, pady=(10,0), padx=(0, 0))
-        for eachItem in range(len(engineTypeList)):
-            advSearch_engineType_entry.insert(END, engineTypeList[eachItem])
-
-
-        advSearch_audio = Label(self, text="Audio: ", bg="#36454F", fg="white", font=("Verdana", 16))
-        advSearch_audio.grid(column=0, row=3, pady=(10,0), padx=(150, 0))
+        #Audio
+        advSearch_audio = Label(self, text="Audio: ", bg="#36454F", fg="white", font=("Verdana", 12))
+        advSearch_audio.grid(column=2, row=0, pady=(30,0), padx=(0, 0), sticky="W")
         advSearch_audio_entry = tk.Listbox(self, width=30, height=3, selectmode="multiple", exportselection=False, font=("Verdana", 10))
-        advSearch_audio_entry.grid(column=1, row=3, pady=(10,0), padx=(0, 150))
+        advSearch_audio_entry.grid(column=3, row=0, pady=(30,0), padx=(0, 0), sticky="W")
         for eachItem in range(len(audioTypes)):
             advSearch_audio_entry.insert(END, audioTypes[eachItem])
 
-        advSearch_extPaint = Label(self, text="External Paint: ", bg="#36454F", fg="white", font=("Verdana", 16))
-        advSearch_extPaint.grid(column=2, row=3, pady=(10,0), padx=(0, 0))
-        advSearch_extPaint_entry = tk.Listbox(self, width=30, height=6, selectmode="multiple", exportselection=False, font=("Verdana", 10))
-        advSearch_extPaint_entry.grid(column=3, row=3, pady=(10,0), padx=(0, 0))
-        for eachItem in range(len(paintList)):
-            advSearch_extPaint_entry.insert(END, paintList[eachItem])
-
-
-        advSearch_extRim = Label(self, text="Rim Style: ", bg="#36454F", fg="white", font=("Verdana", 16))
-        advSearch_extRim.grid(column=0, row=4, pady=(10,0), padx=(150, 0))
-        advSearch_extRim_entry = tk.Listbox(self, width=30, height=4, selectmode="multiple", exportselection=False, font=("Verdana", 10))
-        advSearch_extRim_entry.grid(column=1, row=4, pady=(10,0), padx=(0, 150))
-        for eachItem in range(len(rimList)):
-            advSearch_extRim_entry.insert(END, rimList[eachItem])
-
-        advSearch_interior = Label(self, text="Interior: ", bg="#36454F", fg="white", font=("Verdana", 16))
-        advSearch_interior.grid(column=2, row=4, pady=(10,0), padx=(0, 0))
+        # Interior
+        advSearch_interior = Label(self, text="Interior: ", bg="#36454F", fg="white", font=("Verdana", 12))
+        advSearch_interior.grid(column=2, row=1, pady=(10,0), padx=(0, 0), sticky="W")
         advSearch_interior_entry = tk.Listbox(self, width=30, height=5, selectmode="multiple", exportselection=False, font=("Verdana", 10))
-        advSearch_interior_entry.grid(column=3, row=4, pady=(10,0), padx=(0, 0))
+        advSearch_interior_entry.grid(column=3, row=1, pady=(10,0), padx=(0, 0), sticky="W")
         for eachItem in range(len(interiorList)):
             advSearch_interior_entry.insert(END, interiorList[eachItem])
 
-
-        advSearch_Saftey = Label(self, text="Saftey Features: ", bg="#36454F", fg="white", font=("Verdana", 16))
-        advSearch_Saftey.grid(column=0, row=5, pady=(10,0), padx=(150, 0))
+        # Safety Features
+        advSearch_Saftey = Label(self, text="Safety Features: ", bg="#36454F", fg="white", font=("Verdana", 12))
+        advSearch_Saftey.grid(column=2, row=2, pady=(10,0), padx=(0, 0), sticky="W")
         advSearch_Saftey_entry = tk.Listbox(self, width=30, height=7, selectmode="multiple", exportselection=False, font=("Verdana", 10))
-        advSearch_Saftey_entry.grid(column=1, row=5, pady=(10,0), padx=(0, 150))
-        for eachItem in range(len(safteyList)):
+        advSearch_Saftey_entry.grid(column=3, row=2, pady=(10,0), padx=(0, 0), sticky="W")
+        for eachItem in range(len(safteyList)):  # Note: You had a typo in this variable name (safteyList)
             advSearch_Saftey_entry.insert(END, safteyList[eachItem])
 
-        advSearch_instrument = Label(self, text="Instruments: ", bg="#36454F", fg="white", font=("Verdana", 16))
-        advSearch_instrument.grid(column=2, row=5, pady=(10,0), padx=(0, 0))
-        advSearch_instrument_entry = tk.Listbox(self, width=30, height=4, selectmode="multiple", exportselection=False, font=("Verdana", 10))
-        advSearch_instrument_entry.grid(column=3, row=5, pady=(10,0), padx=(0, 0))
-        for eachItem in range(len(instrumentsList)):
-            advSearch_instrument_entry.insert(END, instrumentsList[eachItem])
-
-
-        advSearch_comfort = Label(self, text="Comfrot Features: ", bg="#36454F", fg="white", font=("Verdana", 16))
-        advSearch_comfort.grid(column=0, row=6, pady=(10,0), padx=(150, 0))
+        # Comfort Features
+        advSearch_comfort = Label(self, text="Comfort Features: ", bg="#36454F", fg="white", font=("Verdana", 12))
+        advSearch_comfort.grid(column=2, row=3, pady=(10,0), padx=(0, 0), sticky="W")
         advSearch_comfort_entry = tk.Listbox(self, width=30, height=10, selectmode="multiple", exportselection=False, font=("Verdana", 10))
-        advSearch_comfort_entry.grid(column=1, row=6, pady=(10,0), padx=(0, 150))
+        advSearch_comfort_entry.grid(column=3, row=3, pady=(10,0), padx=(0, 0), sticky="W")
         for eachItem in range(len(comfortList)):
             advSearch_comfort_entry.insert(END, comfortList[eachItem])
 
-        advSearch_packages = Label(self, text="Extra Packages: ", bg="#36454F", fg="white", font=("Verdana", 16))
-        advSearch_packages.grid(column=2, row=6, pady=(10,0), padx=(0, 0))
+        ### Exterior Features ###
+        advSearch_extPaint = Label(self, text="External Paint: ", bg="#36454F", fg="white", font=("Verdana", 12))
+        advSearch_extPaint.grid(column=4, row=0, pady=(30,0), padx=(0, 0), sticky="W")
+        advSearch_extPaint_entry = tk.Listbox(self, width=30, height=6, selectmode="multiple", exportselection=False, font=("Verdana", 10))
+        advSearch_extPaint_entry.grid(column=5, row=0, pady=(30,0), padx=(0, 0), sticky="W")
+        for eachItem in range(len(paintList)):
+            advSearch_extPaint_entry.insert(END, paintList[eachItem])
+
+        advSearch_extRim = Label(self, text="Rim Style: ", bg="#36454F", fg="white", font=("Verdana", 12))
+        advSearch_extRim.grid(column=4, row=1, pady=(10,0), padx=(0, 0), sticky="W")
+        advSearch_extRim_entry = tk.Listbox(self, width=30, height=4, selectmode="multiple", exportselection=False, font=("Verdana", 10))
+        advSearch_extRim_entry.grid(column=5, row=1, pady=(10,0), padx=(0, 0), sticky="W")
+        for eachItem in range(len(rimList)):
+            advSearch_extRim_entry.insert(END, rimList[eachItem])
+        
+        # Transmission
+        advSearch_transmission = Label(self, text="Transmission: ", bg="#36454F", fg="white", font=("Verdana", 12))
+        advSearch_transmission.grid(column=4, row=2, pady=(10,0), padx=(0, 0))
+        advSearch_transmission_entry = tk.Listbox(self, width=30, height=2, selectmode="single", exportselection=False, font=("Verdana", 10))
+        advSearch_transmission_entry.grid(column=5, row=2, pady=(10,0), padx=(0, 0))
+        for eachItem in range(len(transmissionList)):
+            advSearch_transmission_entry.insert(END, transmissionList[eachItem])
+
+        # Engine Type
+        advSearch_engineType = Label(self, text="Engine Type: ", bg="#36454F", fg="white", font=("Verdana", 12))
+        advSearch_engineType.grid(column=4, row=3, pady=(10,0), padx=(0, 0))
+        advSearch_engineType_entry = tk.Listbox(self, width=30, height=3, selectmode="single", exportselection=False, font=("Verdana", 10))
+        advSearch_engineType_entry.grid(column=5, row=3, pady=(10,0), padx=(0, 0))
+        for eachItem in range(len(engineTypeList)):
+            advSearch_engineType_entry.insert(END, engineTypeList[eachItem])
+
+        # Extra Packages
+        advSearch_packages = Label(self, text="Extra Packages: ", bg="#36454F", fg="white", font=("Verdana", 12))
+        advSearch_packages.grid(column=4, row=4, pady=(10,0), padx=(0, 0))
         advSearch_packages_entry = tk.Entry(self, width=30, textvariable=self.packages, font=("Verdana", 10))
-        advSearch_packages_entry.grid(column=3, row=6, pady=(10,0), padx=(0, 0))
+        advSearch_packages_entry.grid(column=5, row=4, pady=(10,0), padx=(0, 0))
+
+        # Add a label to display the search result message
+        self.search_result_label = Label(self, text="", width=30, height=2)
+        self.search_result_label.grid(column=0, row=4, columnspan=1, pady=(10, 0))
 
         # Search button below the extra packages code
-        advSearch_button = Button(self, text="Find Vehicle", bg="#36454F", fg="white", font=("Verdana", 16))
-        advSearch_button.grid(column=0, row=14, pady=(30,0), padx=(150, 0), columnspan=4)
-
-        #  # Add a label to display the search result message
-        self.search_result_label = Label(self, text="")
-        self.search_result_label.grid(column=0, row=6, pady=(37.5, 0))
+        advSearch_button = Button(self, text="Find Vehicle")
+        advSearch_button.grid(column=1, row=4, pady=(10,0), padx=(20, 0), columnspan=1)
