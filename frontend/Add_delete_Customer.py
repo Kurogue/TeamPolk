@@ -8,7 +8,7 @@ import datetime
 import tkinter as tk 
 from tkinter import StringVar, IntVar, Button, Label, Entry, Toplevel
 
-class Vehicle_Sells(Toplevel):
+class Add_delete_Customer(Toplevel):
     def __init__(self, master=None):
         super().__init__(master = master)
         self.title("Sales")

@@ -9,6 +9,7 @@ from frontend.Advanced_search import *
 from backend.queries.find_queries import *
 from frontend.Add_delete_accessories import *
 from frontend.Add_delete_Customer import *
+from frontend.Add_delete_Employee import *
 import datetime
 from PIL import ImageTk, Image
 
@@ -56,8 +57,10 @@ def add_accessory():
     Add_Delete_Accessory(root)
 
 def add_customer():
-    Vehicle_Sells(root)
+    Add_delete_Customer(root)
 
+def add_employee():
+    Add_delete_Employee(root)
 
 locate_vehicle_label = tk.Label(root, text="Do you wish to find a vehicle?", font=("Verdana", 12), fg="white", bg="#36454F")
 locate_vehicle_label.grid(column=0, row=0, padx=(label_padding, 0), pady=(160, 20))
@@ -84,19 +87,27 @@ CustomerBar.grid(column=0, row=4, padx=(label_padding, 0), pady=(0, 20))
 CustomerButton = tk.Button(text="Yes", command=add_customer, width=7, font=("Verdana", 10, "bold"), bg="white", fg="#36454F")
 CustomerButton.grid(column=1, row=4, pady=(0, 20))
 
+spacer = tk.Label(root, width=20, bg="#36454F")
+spacer.grid(column=2, row=0)
+
+EmployeeBar = tk.Label(root, text="Add/Delete Employee", font=("Verdana", 12), fg="white", bg="#36454F")
+EmployeeBar.grid(column=3, row=0, padx=(label_padding / 2, 0), pady=(160, 20))
+EmployeeButton = tk.Button(text="Yes", command=add_employee, width=7, font=("Verdana", 10, "bold"), bg="white", fg="#36454F")
+EmployeeButton.grid(column=4, row=0, pady=(160, 20))
+
 list_padding = (screen_width - 880) // 2
 
 instock = find_Instock(connection)
-instock_list = tk.Listbox(root, width=40, height=20)
-instock_list.grid(column=0, row=7, padx=(list_padding, 0), pady=(10, 0), columnspan=3)
+instock_list = tk.Listbox(root, width=60, height=20)
+instock_list.grid(column=0, row=6, padx=(list_padding, 0), pady=(10, 0), columnspan=3)
 
 
 for item in instock:
     instock_list.insert(tk.END, item)
 
 backorder = find_BackOrder(connection)
-backorder_list = tk.Listbox(root, width=40, height=20)
-backorder_list.grid(column=3, row=7, padx=(list_padding, 10), pady=(10, 0), columnspan=3)
+backorder_list = tk.Listbox(root, width=60, height=20)
+backorder_list.grid(column=3, row=6, padx=(list_padding, 10), pady=(10, 0), columnspan=3)
 
 for item in backorder:
     backorder_list.insert(tk.END, item)

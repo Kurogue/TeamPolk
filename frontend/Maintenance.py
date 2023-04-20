@@ -13,7 +13,11 @@ class Vehicle_add_delete(Toplevel):
     def __init__(self, master=None):
         super().__init__(master = master)
         self.title("Maintenance")
-        self.geometry("1500x1200")
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        # Set the geometry of the window to the full size of the screen
+        self.geometry(f"{screen_width}x{screen_height}")
+        self.configure(bg='#36454F')
         self.connection = connect()
         #Parameters to build the maintenance item
         self.main_no = IntVar()
