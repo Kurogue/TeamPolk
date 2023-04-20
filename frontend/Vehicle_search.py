@@ -59,43 +59,43 @@ class Vehicle_search(Toplevel):
 
         self.interior = find_vehicle_interior(self.connection)
         self.interior_list = tk.Listbox(form_frame, width=10, height=10)
-        self.interior_list.place(relx=0.05, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
+        # self.interior_list.place(relx=0.05, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
 
         self.exterior = find_vehicle_exterior(self.connection)
         self.exterior_list = tk.Listbox(form_frame, width=10, height=10)
-        self.exterior_list.place(relx=0.05 + listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
+        # self.exterior_list.place(relx=0.05 + listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
 
         self.control = find_vehicle_control(self.connection)
         self.control_list = tk.Listbox(form_frame, width=10, height=10)
-        self.control_list.place(relx=0.05 + 2 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
+        # self.control_list.place(relx=0.05 + 2 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
 
         self.features = find_vehicle_features(self.connection)
         self.features_list = tk.Listbox(form_frame, width=10, height=10)
-        self.features_list.place(relx=0.05 + 3 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
+        # self.features_list.place(relx=0.05 + 3 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
 
         self.maintenance = find_vehicle_maintenance(self.connection)
         self.maintenance_list = tk.Listbox(form_frame, width=10, height=10)
-        self.maintenance_list.place(relx=0.05 + 4 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
+        # self.maintenance_list.place(relx=0.05 + 4 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
 
         self.safety = find_vehicle_safety(self.connection)
         self.safety_list = tk.Listbox(form_frame, width=10, height=10)
-        self.safety_list.place(relx=0.05 + 5 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
+        # self.safety_list.place(relx=0.05 + 5 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
 
         self.warranty = find_vehicle_warranties(self.connection)
         self.warranty_list = tk.Listbox(form_frame, width=10, height=10)
-        self.warranty_list.place(relx=0.05 + 6 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
+        # self.warranty_list.place(relx=0.05 + 6 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
 
         self.audio = find_vehicle_audio(self.connection)
         self.audio_list = tk.Listbox(form_frame, width=10, height=10)
-        self.audio_list.place(relx=0.05 + 7 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
+        # self.audio_list.place(relx=0.05 + 7 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
 
         self.preform = find_vehicle_preformance(self.connection)
         self.preform_list = tk.Listbox(form_frame, width=10, height=10)
-        self.preform_list.place(relx=0.05 + 8 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
+        # self.preform_list.place(relx=0.05 + 8 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
 
         self.package = find_vehicle_package(self.connection)
         self.package_list = tk.Listbox(form_frame, width=10, height=10)
-        self.package_list.place(relx=0.05 + 9 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
+        # self.package_list.place(relx=0.05 + 9 * listbox_spacing, rely=0.6, relwidth=listbox_width, anchor=tk.CENTER)
         
         # Add a label to display the search result message
         self.search_result_label = Label(form_frame, text="", bg='#36454F', fg='white', font=("Arial", 16, "bold"), width=15)
