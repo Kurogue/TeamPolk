@@ -74,28 +74,8 @@ AccessoriesBar.grid(column=0, row=3, padx=(label_padding, 0), pady=(0, 20))
 AccessoriesButton = tk.Button(text="Yes", command=add_accessory, width=7, font=("Verdana", 10, "bold"), bg="white", fg="#36454F")
 AccessoriesButton.grid(column=1, row=3, pady=(0, 20))
 
-def on_entry_click(event):
-    if removeBar.get() == "Enter vehicle ID to remove":
-        removeBar.delete(0, "end")
-        removeBar.configure(foreground="black")
-
-def on_focus_out(event):
-    if removeBar.get() == "":
-        removeBar.insert(0, "Enter vehicle ID to remove")
-        removeBar.configure(foreground="gray")
-
-removeBar = tk.Entry(root, bg="white", font=("Verdana", 12), foreground="gray", width=20)
-removeBar.insert(0, "Enter vehicle ID to remove")
-removeBar.bind('<FocusIn>', on_entry_click)
-removeBar.bind('<FocusOut>', on_focus_out)
-removeButton = tk.Button(text="Remove", width=10, font=("Verdana", 10, "bold"), bg="white", fg="#36454F")
-
 addBar.grid(column=0, row=5, padx=(label_padding, 0), pady=(0, 20))
 addButton.grid(column=1, row=5, padx=10, pady=(0, 20))
-
-removeBar.grid(column=0, row=6, padx=(label_padding, 0), pady=(0, 20))
-removeButton.grid(column=1, row=6, padx=10, pady=(0, 20))
-
 
 list_padding = (screen_width - 880) // 2
 
