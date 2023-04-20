@@ -84,7 +84,6 @@ class Add_delete_Maintenance(Toplevel):
 
         self.maintenance_button_del = Button(self, text="Delete", command=self.delete_Maintenance)
         self.maintenance_button_del.grid(column=1, row=6, pady=(20,0), padx=(20,0))
-        self.after(1000, __init__)
     def all_maintenance_today(self):
         cur = self.connection.cursor()
         date = datetime.date.today()
