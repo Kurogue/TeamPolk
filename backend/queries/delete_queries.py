@@ -53,7 +53,7 @@ def delete_Instock(connection, vin):
 	if cur.fetchone() is None:
 		return False
 	else:
-		backorder = """"DELETE FROM Instock WHERE VIN = %s;"""
+		backorder = """DELETE FROM Instock WHERE VIN = %s;"""
 		cur.execute(backorder, (vin,))
 		connection.commit()
 		return True
@@ -64,7 +64,7 @@ def delete_backorder(connection, vin):
 	if cur.fetchone() is None:
 		return False
 	else:
-		backorder = """"DELETE FROM Backorder WHERE VIN = %s;"""
+		backorder = """DELETE FROM Backorder WHERE VIN = %s;"""
 		cur.execute(backorder, (vin,))
 		connection.commit()
 		return True
