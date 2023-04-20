@@ -4,12 +4,12 @@ from tkinter import PhotoImage
 from backend.db import connect
 from backend.queries.exteriorQueries import add_exterior, lookup_exterior, delete_exterior
 from frontend.Vehicle_search import *
-from frontend.Add_Delete_vehicle import *
+from frontend.Vehicle import *
 from frontend.Advanced_search import *
 from backend.queries.find_queries import *
-from frontend.Add_delete_accessories import *
-from frontend.Add_delete_Customer import *
-from frontend.Add_delete_Employee import *
+from frontend.Accessories import *
+from frontend.Customer import *
+from frontend.Employee import *
 import datetime
 from PIL import ImageTk, Image
 
