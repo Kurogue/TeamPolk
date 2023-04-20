@@ -35,7 +35,7 @@ class Add_delete_Employee(Toplevel):
         padx_value = 20
 
         ### ADD EMPLOYEE ###
-        self.title_employee = Label(self, text="CREATE EMPLOYEE", bg=label_bg, fg=label_fg, font=("Verdana", 20))
+        self.title_employee = Label(self, text="CREATE/LOCATE EMPLOYEE", bg=label_bg, fg=label_fg, font=("Verdana", 20))
         self.title_employee.grid(column=0, row=0)
 
         # enter the required fields
@@ -74,7 +74,9 @@ class Add_delete_Employee(Toplevel):
         self.employ_addr_label.grid(column=0, row=6, padx=(20,0), pady=(20,0), sticky="W")
         self.employ_addr_entry = Entry(self, width=10, textvariable=self.employee_addr)
         self.employ_addr_entry.grid(column=1, row=6, pady=(20,0), padx=(20,0))
-
+        # Create Button to delete data
+        self.add_employee_button = Button(self, text="Delete", command=self.create_Employee)
+        self.add_employee_button.grid(column=2, row=6, pady=(20,0), padx=(20,0))
         ### DELETE EMPLOYEE section ###
         self.title_employee = Label(self, text="DELETE EMPLOYEE", bg=label_bg, fg=label_fg, font=("Verdana", 20))
         self.title_employee.grid(column=0, row=7, padx=(20, 0), pady=(40, 0))  
@@ -99,27 +101,43 @@ class Add_delete_Employee(Toplevel):
 
         # Create Button to delete data
         self.delete_employee_button = Button(self, text="Delete", command=self.delete_Employee)
-        self.delete_employee_button.grid(column=0, row=11, pady=(20,0), padx=(20,0))
+        self.delete_employee_button.grid(column=2, row=10, pady=(20,0), padx=(20,0))
 
     def create_Employee(self):
         role = self.employee_title.get()
         if role == 'Manager':
-            self.add_manager_employee(self.connection, self.employee_id.get(), self.employee_ssn.get(), self.employee_fname.get(), self.employee_lname.get(), self.employee_date, self.employee_addr.get())
+            add_manager_employee(self.connection, self.employee_id.get(), self.employee_ssn.get(), self.employee_fname.get(), self.employee_lname.get(), self.employee_date, self.employee_addr.get())
         elif role == 'Sales':
-            self.add_sales_employee(self.connection,self.employee_id.get(), self.employee_ssn.get(), self.employee_fname.get(), self.employee_lname.get(), self.employee_date, self.employee_addr.get() )
+            add_sales_employee(self.connection,self.employee_id.get(), self.employee_ssn.get(), self.employee_fname.get(), self.employee_lname.get(), self.employee_date, self.employee_addr.get() )
         elif role == 'Maintenance':
-            self.add_maintenace_employee(self.connection, self.employee_id.get(), self.employee_ssn.get(), self.employee_fname.get(), self.employee_lname.get(), self.employee_date, self.employee_addr.get())
+            add_maintenace_employee(self.connection, self.employee_id.get(), self.employee_ssn.get(), self.employee_fname.get(), self.employee_lname.get(), self.employee_date, self.employee_addr.get())
         else:
             #Need to print error message to the window
             print("ERROR") # placeholder
     def delete_Employee(self):
         role = self.employee_title.get()
         if role == 'Manager':
-            self.delete_manager_employee(self.connection, self.employee_id_del.get(), self.employee_ssn_del.get())
+            delete_manager_employee(self.connection, self.employee_id_del.get(), self.employee_ssn_del.get())
         elif role == 'Sales':
-            self.delete_sales_employee(self.connection, self.employee_id_del.get(), self.employee_ssn_del.get() )
+            delete_sales_employee(self.connection, self.employee_id_del.get(), self.employee_ssn_del.get() )
         elif role == 'Maintenance':
-            self.delete_maintenace_employee(self.connection,  self.employee_id_del.get(), self.employee_ssn_del.get() )
+            delete_maintenace_employee(self.connection,  self.employee_id_del.get(), self.employee_ssn_del.get() )
         else:
             #Need to print error message to the window
             print("ERROR") #placeholder
+
+    def locate_employee(self):  
+        label_font = ("Verdana", 12)
+        label_fg = "white"
+        label_bg = "#36454F"
+        value = find_employee(self.connection, self.employee_id.get(), self.employee_fname.get(), self.employee_lname.get(), self.employee_ssn.get())
+        if value is None:
+            self.employ_Failed = Label(self, text="Failed To Find Employee", bg=label_bg, fg=label_fg, font=label_font)
+            self.employ_Failed.grid(column=2, row=3, padx=(20,0), pady=(20,0), sticky="W")
+        else:
+            self.employ_Success = Label(self, text="Employee found", bg=label_bg, fg=label_fg, font=label_font)
+            self.employ_Success.grid(column=0, row=10, padx=(20,0), pady=(20,0), sticky="W")
+            employee_list = tk.Listbox(self, width=60, height=20)
+            employee_list.grid(column=2, row=5, padx=(20, 0), pady=(20, 0), columnspan=3)
+            for employ in value:
+                employee_list.insert(tk.END, employ)

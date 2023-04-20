@@ -359,7 +359,7 @@ def find_all_Maintenance(connection, date=None, service=None):
 		return cur.fetchall()
 
 #Find All Employee
-def find_all_interiors(connection, ):
+def find_all_employees(connection):
 	cur = connection.cursor()
 	find = """SELECT * FROM Manager NATURAL JOIN Maintence_employ NATURAL JOIN Sales_employ;"""
 	cur.execute(find)
@@ -373,11 +373,11 @@ def find_maintence_employee(connection, e_id=None, fname=None, lname=None):
 	cur.execute(find, attr)
 	return cur.fetchone()
 
-#Find All Employee-Maintenance
-def find_customer(connection):
+#Find 1 employee
+def find_employee(connection, e_id, fname=None, lname=None, ssn=None):
 	cur = connection.cursor()
-	find ="""SELECT * FROM Maintence_employ;"""
-	cur.execute(find)
+	find ="""SELECT * FROM Manager NATURAL JOIN Sales_employ NATURAL JOIN Maintence_employ WHERE e_id = %s OR (fname =%s AND lname = %s) OR ssn = %s;"""
+	cur.execute(find, (e_id, fname, lname, ssn))
 	return cur.fetchall()
 
 #Find Employee-Manager
@@ -388,7 +388,7 @@ def find_manager_employee(connection, e_id=None, fname=None, lname=None):
 	cur.execute(find, attr)
 	return cur.fetchone()
 
-#Find All Employee-Manager
+#Find All Customer
 def find_customer(connection):
 	cur = connection.cursor()
 	find ="""SELECT * FROM Manager;"""
