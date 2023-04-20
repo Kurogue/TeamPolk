@@ -170,7 +170,11 @@ class Vehicle_add_delete(Toplevel):
             self.stock_validation_label.config(text=instock_error)
             return
         else:
-            add_vehicle(self.connection, self.vin.get().lower(), self.make.get(), self.model.get(), self.year.get(), self.mileage.get(), self.package_id.get(), self.audio_id.get(), self.preform_id.get(),  self.stock.get(), self.lot.get(), self.spot.get())
+            value = add_vehicle(self.connection, self.vin.get(), self.make.get(), self.model.get(), self.year.get(), self.mileage.get(), self.package_id.get(), self.audio_id.get(), self.preform_id.get(),  self.stock.get(), self.lot.get(), self.spot.get())
+            if value is False:
+                self.failed_vehicle = Label(self, text="Failed to add Vehicle to DB")
+                self.failed_vehicle.grid(column=1, row=12, padx=(20,0), pady=(20,0))
+                return
             self.i_list = self.int_lst.get().split(',')
             self.e_list = self.ext_lst.get().split(',')
             self.s_list = self.safe_lst.get().split(',')
@@ -179,18 +183,46 @@ class Vehicle_add_delete(Toplevel):
             self.c_list = self.control_lst.get().split(',')
         
             for i in self.i_list:
-                add_hasInterior(self.connection, self.vin.get(), int(i))
+                value = add_hasInterior(self.connection, self.vin.get(), int(i))
+                if value is not True:
+                    self.failed_interior = Label(self, text="Failed to add to HasInterior to DB")
+                    self.failed_interior.grid(column=1, row=12, padx=(20,0), pady=(20,0))
+                    return
             for e in self.e_list:
-                add_hasExterior(self.connection, self.vin.get(), int(e))
+                value = add_hasExterior(self.connection, self.vin.get(), int(e))
+                if value is not True:
+                    self.failed_interior = Label(self, text="Failed to add to HasExterior to DB")
+                    self.failed_interior.grid(column=1, row=12, padx=(20,0), pady=(20,0))
+                    return
             for s in self.s_list:
-                add_hasSafety(self.connection, self.vin.get(), int(s))
+                value = add_hasSafety(self.connection, self.vin.get(), int(s))
+                if value is not True:
+                    self.failed_interior = Label(self, text="Failed to add to HasSafety to DB")
+                    self.failed_interior.grid(column=1, row=12, padx=(20,0), pady=(20,0))
+                    return
             for w in self.w_list:
-                add_hasWarranty(self.connection, self.vin.get(), int(w))
+                value = add_hasWarranty(self.connection, self.vin.get(), int(w))
+                if value is not True:
+                    self.failed_interior = Label(self, text="Failed to add to HasWarranty to DB")
+                    self.failed_interior.grid(column=1, row=12, padx=(20,0), pady=(20,0))
+                    return
             for f in self.f_list:
-                add_hasFeature(self.connection, self.vin.get(), int(f))
+                value = add_hasFeature(self.connection, self.vin.get(), int(f))
+                if value is not True:
+                    self.failed_interior = Label(self, text="Failed to add to HasFeatures to DB")
+                    self.failed_interior.grid(column=1, row=12, padx=(20,0), pady=(20,0))
+                    return
             for c in self.c_list:
-                add_hasControl(self.connection, self.vin.get(), int(c))
+                value = add_hasControl(self.connection, self.vin.get(), int(c))
+                if value is not True:
+                    self.failed_interior = Label(self, text="Failed to add to HasControl to DB")
+                    self.failed_interior.grid(column=1, row=12, padx=(20,0), pady=(20,0))
+                    return
             self.connection = connect() #restablish connection
-        
+            self.Success = Label(self, text="Succeeded Adding Vehicle")
+            self.Success.grid(column=1, row=12, padx=(20,0), pady=(20,0))
     def delete_vehicle(self):
-        delete_vehicle(self.connection, self.vin.get())
+        value = delete_vehicle(self.connection, self.vin.get())
+        if value is not True:
+            self.failed_delete = Label(self, text="Failed to Delete From DB")
+            self.failed_delete.grid(column=1, row=12, padx=(20,0), pady=(20,0))

@@ -106,11 +106,11 @@ def find_sold_vehicles(connection):
 def find_Instock(connection, vin=None):
 	cur = connection.cursor()
 	if vin is None:
-		find = """SELECT * FROM Instock"""
+		find = """SELECT VIN, Make, Model, Year, Date_added FROM Instock NATURAL JOIN Vehicle"""
 		cur.execute(find)
 		return cur.fetchall()
 	else:
-		find = """SELECT * FROM Instock WHERE VIN = %s;"""
+		find = """SELECT VIN, Make, Model, Year, Date_added FROM Instock NATURAL JOIN Vehicle WHERE VIN = %s;"""
 		value = (vin,)
 		cur.execute(find, value)
 		return cur.fetchone()
@@ -119,11 +119,11 @@ def find_Instock(connection, vin=None):
 def find_BackOrder(connection, vin=None):
 	cur = connection.cursor()
 	if vin is None:
-		find = """SELECT * FROM BackOrder"""
+		find = """SELECT VIN, Make, Model, Year, Date_added FROM BackOrder NATURAL JOIN Vehicle;"""
 		cur.execute(find)
 		return cur.fetchall()
 	else:
-		find = """SELECT * FROM BackOrder WHERE VIN = %s;"""
+		find = """SELECT VIN, Make, Model, Year, Date_added FROM BackOrder NATURAL JOIN Vehicle WHERE VIN = %s"""
 		value = (vin,)
 		cur.execute(find, value)
 		return cur.fetchone()

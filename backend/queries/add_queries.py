@@ -20,7 +20,7 @@ def add_vehicle(connection, vin, make, model, year, mileage, package_id, audio_i
         cur.execute(insert_query, (vin, make, model, year, mileage, package_id, audio_id, preform_id,))
 		
         # Add the vehicle to either the Instock or Backorder table
-        if instock == 'yes':
+        if instock.lower() == 'yes':
             instock_query = """INSERT INTO Instock (VIN, Date_added, Available, Lot, Spot) VALUES (%s, %s, %s, %s, %s);"""
             date = datetime.date.today()
             cur.execute(instock_query, (vin, date, True, lot, spot,))
