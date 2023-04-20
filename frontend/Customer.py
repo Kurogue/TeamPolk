@@ -11,7 +11,7 @@ from tkinter import StringVar, IntVar, Button, Label, Entry, Toplevel
 class Add_delete_Customer(Toplevel):
     def __init__(self, master=None):
         super().__init__(master = master)
-        self.title("Sales")
+        self.title("Customer")
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
         # Set the geometry of the window to the full size of the screen
@@ -86,12 +86,18 @@ class Add_delete_Customer(Toplevel):
     def create_Customer(self):
         #name, address, email, dob, p_no
         date = datetime.date(self.year.get(), self.month.get(), self.day.get())
-        value = add_customer(self.connection, self.c_name, self.c_addr, self.c_email, date, self.phone)
+        value = add_customer(self.connection, self.c_name.get(), self.c_addr.get(), self.c_email.get(), date, self.phone.get())
         if value is True:
-            self.add_confirmed = Label(self, text="Customer Add Successfully", bg="36454F", fg="white")
+            self.add_confirmed = Label(self, text="Customer Add Successfully")
             self.add_confirmed.grid(column=2, row=11, padx=(30,0), pady=(30,0))
         else:
-            self.add_failed = Label(self, text="Failed To added Customer", bg="36454F", fg="white")
+            self.add_failed = Label(self, text="Failed To added Customer")
             self.add_failed.grid(column=2, row=11, padx=(30,0), pady=(30,0))
     def delete_Customer(self):
-        delete_customer(self.connection, self.c_name, self.c_email)
+        value = delete_customer(self.connection, self.c_name.get(), self.c_email.get())
+        if value is True:
+            self.add_confirmed = Label(self, text="Customer delete Successfully")
+            self.add_confirmed.grid(column=2, row=11, padx=(30,0), pady=(30,0))
+        else:
+            self.add_failed = Label(self, text="Failed To delete Customer")
+            self.add_failed.grid(column=2, row=11, padx=(30,0), pady=(30,0))

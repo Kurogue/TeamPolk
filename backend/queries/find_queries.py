@@ -361,7 +361,7 @@ def find_all_Maintenance(connection, date=None, service=None):
 #Find All Employee
 def find_all_employees(connection):
 	cur = connection.cursor()
-	find = """SELECT * FROM Manager NATURAL JOIN Maintence_employ NATURAL JOIN Sales_employ;"""
+	find = """SELECT employ_id,  FROM Manager OUTER JOIN Maintence_employ OUTER JOIN Sales_employ;"""
 	cur.execute(find)
 	return cur.fetchall()
 
