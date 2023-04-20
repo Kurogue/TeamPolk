@@ -69,7 +69,7 @@ class Vehicle_Sells(Toplevel):
 
 
     def make_sale(self):
-        cur = connection.cursor()
+        cur = self.connection.cursor()
         up_vehicle = """UPDATE Vehicle SET Customer_name = %s, Customer_email = %s WHERE VIN = %s;"""
         cur.execute(up_vehicle, (self.c_name, self.c_email, self.vin,))
         up_customer = """UPDATE Customer Set Seller = %s WHERE Customer_name = %s AND Customer_email = %s"""
@@ -79,7 +79,7 @@ class Vehicle_Sells(Toplevel):
         if value is False:
             self.fail_label = Label(self, text="Failed to remove from Instock list")
             self.fail_label.grid(column=2, row=7, padx=(30,0), pady=(30,0))
-        connection.commit()
+        self.connection.commit()
         return
     def move_instock(self):
         value = add_Instock(self.connection, self.vin_instock, self.lot, self.spot)

@@ -9,7 +9,7 @@ from tkinter import ttk
 from tkinter import StringVar, IntVar, Button, Label, Entry, Toplevel
 
 
-class Vehicle_add_delete(Toplevel):
+class Add_delete_Maintenance(Toplevel):
     def __init__(self, master=None):
         super().__init__(master = master)
         self.title("Maintenance")
@@ -26,46 +26,61 @@ class Vehicle_add_delete(Toplevel):
         self.day = IntVar()
         self.service = StringVar()
         self.e_id = IntVar()
-        self.date = datetime.date()
+        self.date = datetime.date.today()
         self.vin = StringVar()
 
-        #Build the outline of the maintenance requirements
-        self.maintenance_date_label = Label(self, text="Enter The date in day-month-year using numbers: dd-mm-yyyy:")
-        self.maintenance_date_label.grid(column=2, row=3, padx=(30,0), pady=(30,0))
-        self.maintenance_date_entry = Entry(self, width=2, textvariable=self.day)
-        self.maintenance_date_entry.grid(column=2,row=4,padx=(10,0),pady=(10,0))
-        self.maintenance_month_entry = Entry(self, width=2, textvariable=self.month)
-        self.maintenance_month_entry.grid(column=2, row=5, padx=(10,0), pady=(10,0))
-        self.maintenance_year_entry = Entry(self, width=4, textvariable=self.year)
+        # Customize the font size for labels and entry fields
+        label_font = ("Verdana", 14)
+        entry_font = ("Verdana", 14)
+        bg_color = "#36454F"
+        fg_color = "white"
 
-        self.maintenance_number_label = Label(self, text="Enter Maintenance ID: ")
-        self.maintenance_number_label.grid(column=2, row=6, padx=(20,0), pady=(20,0))
-        self.maintenance_number_entry = Entry(self, width=10, textvariable=self.e_id)
-        self.maintenance_number_entry.grid(column=3, row=6, padx=(20,0), pady=(20,0))
+        # Build the outline of the date requirements
+        self.maintenance_date_label = Label(self, text="Enter The DOB in day-month-year using numbers: dd-mm-yyyy:", font=label_font, bg=bg_color, fg=fg_color)
+        self.maintenance_date_label.grid(column=0, row=0, padx=(30, 0), pady=(30, 0), sticky="W")
 
-        self.maintenance_service_label = Label(self, text="Enter the type of service to preform: ")
-        self.maintenance_service_label.grid(column=2, row = 8, padx=(20,0), pady=(20,0))
-        self.maintenance_service_entry = Entry(self, width=20, textvariable=self.service)
-        self.maintenance_service_entry.grid(column=3, row=8, padx=(20,0), pady=(20,0))
+        # Configure the DOB entry fields to be horizontally aligned and the same size
+        self.maintenance_date_label_date_entry = Entry(self, width=2, textvariable=self.day, font=entry_font)
+        self.maintenance_date_label_date_entry.grid(column=1, row=0, padx=(10, 0), pady=(30, 0), sticky="W")
 
-        self.maintenance_vin_label = Label(self, text="Enter the VIN of the vehicle being serviced: ")
-        self.maintenance_vin_label.grid(column=2, row = 8, padx=(20,0), pady=(20,0))
-        self.maintenance_vin_entry = Entry(self, width=20, textvariable=self.vin)
-        self.maintenance_vin_entry.grid(column=3, row=8, padx=(20,0), pady=(20,0))
-        
+        self.maintenance_date_label_month_entry = Entry(self, width=2, textvariable=self.month, font=entry_font)
+        self.maintenance_date_label_month_entry.grid(column=2, row=0, padx=(10, 0), pady=(30, 0), sticky="W")
+
+        self.maintenance_date_label_year_entry = Entry(self, width=4, textvariable=self.year, font=entry_font)
+        self.maintenance_date_label_year_entry.grid(column=3, row=0, padx=(10, 0), pady=(30, 0), sticky="W")
+
+        self.maintenance_number_label = Label(self, text="Enter Maintenance ID: ",
+                                            font=label_font, bg=bg_color, fg=fg_color)
+        self.maintenance_number_label.grid(column=0, row=1, sticky=W, padx=(30,0), pady=(20,0))
+        self.maintenance_number_entry = Entry(self, width=10, textvariable=self.e_id, font=("Helvetica", 12))
+        self.maintenance_number_entry.grid(column=1, row=1, sticky=W, padx=(10,0), pady=(20,0), columnspan=3)
+
+        self.maintenance_service_label = Label(self, text="Enter the type of service to perform: ",
+                                            font=label_font, bg=bg_color, fg=fg_color)
+        self.maintenance_service_label.grid(column=0, row=2, sticky=W, padx=(30,0), pady=(20,0))
+        self.maintenance_service_entry = Entry(self, width=20, textvariable=self.service, font=("Helvetica", 12))
+        self.maintenance_service_entry.grid(column=1, row=2, sticky=W, padx=(10,0), pady=(20,0), columnspan=3)
+
+        self.maintenance_vin_label = Label(self, text="Enter the VIN of the vehicle being serviced: ",
+                                        font=label_font, bg=bg_color, fg=fg_color)
+        self.maintenance_vin_label.grid(column=0, row=3, sticky=W, padx=(30,0), pady=(20,0))
+        self.maintenance_vin_entry = Entry(self, width=20, textvariable=self.vin, font=("Helvetica", 12))
+        self.maintenance_vin_entry.grid(column=1, row=3, sticky=W, padx=(10,0), pady=(20,0), columnspan=3)
+
         self.maintenance_button = Button(self, text="Submit", command=self.create_Maintenance)
-        self.maintenance_button.grid(column=2, row=10, padx=(20,0), pady=(20,0))
+        self.maintenance_button.grid(column=0, row=4, sticky=W, padx=(30,0), pady=(20,0))
 
-        self.day_maintenance_listbox = Listbox(self, width=20, height=20)
-        self.day_maintenance_listbox.grid(column=4, row=2, padx=(30,0), pady=(30,0))
+        self.day_maintenance_listbox = Listbox(self, width=150, height=20)
+        self.day_maintenance_listbox.grid(column=0, row=5, padx=(30,0), pady=(30,0))
         self.values = self.all_maintenance_today()
         for i in self.values:
             self.day_maintenance_listbox.insert(tk.END, i)
 
-
         self.maintenance_button_del = Button(self, text="Delete", command=self.delete_Maintenance)
+        self.maintenance_button_del.grid(column=1, row=5, pady=(20,0), padx=(20,0))
+
     def all_maintenance_today(self):
-        cur = connection.cursor()
+        cur = self.connection.cursor()
         date = datetime.date.today()
         find = """SELECT VIN, Make, Model, Year, Service FROM Vehicle NATURAL HasMaintence NATURAL JOIN Maintenance WHERE Date = %s;"""
         cur.execute(find, (date,))
