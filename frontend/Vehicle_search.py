@@ -100,7 +100,7 @@ class Vehicle_search(Toplevel):
         # Add a label to display the search result message
         self.search_result_label = Label(form_frame, text="", bg='#36454F', fg='white', font=("Arial", 16, "bold"), width=15)
         self.search_result_label.grid(column=0, row=5, pady=(10, 10))
-
+        self.after(1000, __init__)
     def locate_vehicle(self):
         vin = self.vin.get()
         #Clear current list

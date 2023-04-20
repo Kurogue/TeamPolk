@@ -129,6 +129,5 @@ backorder_list.grid(column=3, row=6, padx=(list_padding, 10), pady=(10, 0), colu
 
 for item in backorder:
     backorder_list.insert(tk.END, item)
-
 def run_app():
     root.mainloop()

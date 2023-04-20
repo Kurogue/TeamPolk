@@ -376,7 +376,7 @@ def find_maintence_employee(connection, e_id=None, fname=None, lname=None):
 #Find 1 employee
 def find_employee(connection, e_id, fname=None, lname=None, ssn=None):
 	cur = connection.cursor()
-	find ="""SELECT * FROM Manager NATURAL JOIN Sales_employ NATURAL JOIN Maintence_employ WHERE e_id = %s OR (fname =%s AND lname = %s) OR ssn = %s;"""
+	find ="""SELECT * FROM Manager NATURAL JOIN Sales_employ NATURAL JOIN Maintence_employ WHERE employ_id = %s OR (fname =%s AND lname = %s) OR ssn = %s;"""
 	cur.execute(find, (e_id, fname, lname, ssn))
 	return cur.fetchall()
 
