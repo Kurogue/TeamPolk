@@ -45,6 +45,29 @@ def delete_vehicle(connection, vin):
         return
     finally:
         connection.close()
+	
+def delete_Instock(connection, vin):
+	cur = connection.cursor()
+	find = """SELECT * FROM Instock WHERE VIN = %s;"""
+	cur.execute(find, (vin,))
+	if cur.fetchone() is None:
+		return False
+	else:
+		backorder = """"DELETE FROM Instock WHERE VIN = %s;"""
+		cur.execute(backorder, (vin,))
+		connection.commit()
+		return True
+def delete_backorder(connection, vin):
+	cur = connection.cursor()
+	find = """SELECT * FROM Backorder WHERE VIN = %s;"""
+	cur.execute(find, (vin,))
+	if cur.fetchone() is None:
+		return False
+	else:
+		backorder = """"DELETE FROM Backorder WHERE VIN = %s;"""
+		cur.execute(backorder, (vin,))
+		connection.commit()
+		return True
 
 def delete_hasInterior(connection, vin=None, int_id=None):
 	cur = connection.cursor()

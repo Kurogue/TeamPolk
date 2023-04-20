@@ -34,7 +34,31 @@ def add_vehicle(connection, vin, make, model, year, mileage, package_id, audio_i
     except (Exception, psycopg2.DatabaseError) as error:
         print("Error occurred while adding vehicle to database:", error)
         connection.rollback()  # Rollback the changes if any error occurs
+def add_Instock(connection, vin, lot, spot, available=True):
+	cur = connection.cursor()
+	find = """SELECT * FROM Instock WHERE VIN = %s;"""
+	cur.execute(find, (vin,))
+	if cur.fetchone() is not None:
+		return False
+	else:
+		date = datetime.date.today()
+		add = """INSERT INTO Instock (VIN, Date_added, Available, Lot, Spot) VALUES (%s, %s, %s, %s, %s)"""
+		cur.exexute(add, (vin, date, available, lot, spot,))
+		connection.commit()
+		return True
 	
+def add_backorder(connection, vin, available=False):
+	cur = connection.cursor()
+	find = """SELECT * FROM Backorder WHERE VIN = %s;"""
+	cur.execute(find, (vin,))
+	if cur.fetchone() is not None:
+		return False
+	else:
+		date = datetime.date.today()
+		add = """INSERT INTO Backorder (VIN, Date_added, Available,) VALUES (%s, %s, %s)"""
+		cur.exexute(add, (vin, date, available))
+		connection.commit()
+		return True
 def add_hasInterior(connection, vin, int_id):
 	cur = connection.cursor()
 	add = """INSERT INTO HasInterior (VIN, Interior_id) VALUES (%s, %s);"""
