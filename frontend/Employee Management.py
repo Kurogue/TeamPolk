@@ -94,22 +94,22 @@ class Vehicle_add_delete(Toplevel):
     def create_Employee(self):
         role = self.employee_title.get()
         if role == 'Manager':
-            add_manager_employee(self.connection, self.employee_id.get(), self.employee_ssn.get(), self.employee_fname.get(), self.employee_lname.get(), self.employee_date, self.employee_addr.get())
+            self.add_manager_employee(self.connection, self.employee_id.get(), self.employee_ssn.get(), self.employee_fname.get(), self.employee_lname.get(), self.employee_date, self.employee_addr.get())
         elif role == 'Sales':
-            add_sales_employee(self.connection,self.employee_id.get(), self.employee_ssn.get(), self.employee_fname.get(), self.employee_lname.get(), self.employee_date, self.employee_addr.get() )
+            self.add_sales_employee(self.connection,self.employee_id.get(), self.employee_ssn.get(), self.employee_fname.get(), self.employee_lname.get(), self.employee_date, self.employee_addr.get() )
         elif role == 'Maintenance':
-            add_maintenace_employee(self.connection, self.employee_id.get(), self.employee_ssn.get(), self.employee_fname.get(), self.employee_lname.get(), self.employee_date, self.employee_addr.get())
+            self.add_maintenace_employee(self.connection, self.employee_id.get(), self.employee_ssn.get(), self.employee_fname.get(), self.employee_lname.get(), self.employee_date, self.employee_addr.get())
         else:
             #Need to print error message to the window
             print("ERROR") # placeholder
     def delete_Employee(self):
         role = self.employee_title.get()
         if role == 'Manager':
-            delete_manager_employee(self.connection, self.employee_id_del.get(), self.employee_ssn_del.get())
+            self.delete_manager_employee(self.connection, self.employee_id_del.get(), self.employee_ssn_del.get())
         elif role == 'Sales':
-            delete_sales_employee(self.connection, self.employee_id_del.get(), self.employee_ssn_del.get() )
+            self.delete_sales_employee(self.connection, self.employee_id_del.get(), self.employee_ssn_del.get() )
         elif role == 'Maintenance':
-            delete_maintenace_employee(self.connection,  self.employee_id_del.get(), self.employee_ssn_del.get() )
+            self.delete_maintenace_employee(self.connection,  self.employee_id_del.get(), self.employee_ssn_del.get() )
         else:
             #Need to print error message to the window
             print("ERROR") #placeholder

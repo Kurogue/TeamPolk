@@ -228,42 +228,61 @@ class Add_Delete_Accessory(Toplevel):
         
     def add_Interior(self):
         add_interior(self.connection, self.int_id.get(), self.int_type.get(), self.int_desc.get(), self.int_color.get())
+        self.connection = connect()
     def delete_Interior(self):
         delete_interior(self.connection, self.int_id.get(), self.int_type.get())
-    
+        self.connection = connect()
     def add_Exterior(self):
-        add_exterior(self.connection, self.ext_id.get(), self.ext_type.get(), self.ext_desc.get(), self.int_color.get())
+        add_exterior(self.connection, self.ext_id.get(), self.ext_type.get(), self.ext_desc.get(), self.ext_color.get())
+        self.connection = connect()
     def delete_Exterior(self):
         delete_exterior(self.connection, self.ext_id.get(), self.ext_type.get())
+        self.connection = connect()
     def add_Feature(self):
         add_features(self.connection, self.feat_id.get(), self.feat_type.get(), self.feat_desc.get())
+        self.connection = connect()
     def delete_Feature(self):
         delete_features(self.connection, self.feat_id.get(), self.feat_type.get())
+        self.connection = connect()
     def add_Control(self):
         add_control(self.connection, self.con_id.get(), self.con_type.get(), self.con_desc.get())
+        self.connection = connect()
     def delete_Control(self):
         delete_control(self.connection, self.con_id.get(), self.con_type.get())
+        self.connection = connect()
     def add_Handling(self):
         add_handling(self.connection, self.hand_id.get(), self.hand_type.get(), self.hand_desc.get())
+        self.connection = connect()
     def delete_Handling(self):
         delete_handling(self.connection, self.hand_id.get(), self.hand_type.get())
+        self.connection = connect()
     def add_Audio(self):
         add_audio(self.connection, self.audio_id.get(), self.audio_type.get(), self.audio_desc.get())
+        self.connection = connect()
     def delete_Audio(self):
         delete_audio(self.connection, self.audio_id.get(), self.audio_type.get())
+        self.connection = connect()
     def add_Preformance(self):
         add_performance(self.connection, self.preform_id.get(), self.preform_type.get(), self.preform_desc.get())
+        self.connection = connect()
     def delete_Preformance(self):
         delete_preformance(self.connection, self.preform_id.get(), self.preform_type.get())
+        self.connection = connect()
     def add_Package(self):
         add_package(self.connection, self.pack_id.get(), self.pack_type.get(), self.pack_desc.get())
+        self.connection = connect()
     def delete_Package(self):
         delete_package(self.connection, self.pack_id.get(), self.pack_type.get())
+        self.connection = connect()
     def add_Safety(self):
         add_safe_security(self.connection, self.safe_id.get(), self.safe_type.get(), self.safe_desc.get())
+        self.connection = connect()
     def delete_Safety(self):
         delete_safe_security(self.connection, self.safe_id.get(), self.safe_type.get())
+        self.connection = connect()
     def add_Warranty(self):
         add_warranty(self.connection, self.warr_id.get(), self.warr_type.get(), self.warr_desc.get())
+        self.connection = connect()
     def delete_Warranty(self):
         delete_warranty(self.connection, self.warr_id.get(), self.warr_type.get())
+        self.connection = connect()
