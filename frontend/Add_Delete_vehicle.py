@@ -228,3 +228,6 @@ class Vehicle_add_delete(Toplevel):
         if value is not True:
             self.failed_delete = Label(self, text="Failed to Delete From DB")
             self.failed_delete.grid(column=1, row=12, padx=(20,0), pady=(20,0))
+        else:
+            self.succeed_delete = Label(self, text="Successfully Deleted From DB")
+            self.succeed_delete.grid(column=1, row=12, padx=(20,0), pady=(20,0))
