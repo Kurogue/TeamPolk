@@ -5,6 +5,7 @@ from backend.queries.delete_queries import *
 from tkinter import *
 import datetime
 import tkinter as tk 
+from tkinter import ttk
 from tkinter import StringVar, IntVar, Button, Label, Entry, Toplevel
 
 
@@ -52,8 +53,20 @@ class Vehicle_add_delete(Toplevel):
         self.maintenance_button = Button(self, text="Submit", command=self.create_Maintenance)
         self.maintenance_button.grid(column=2, row=10, padx=(20,0), pady=(20,0))
 
-        self.maintenance_button_del = Button(self, text="Delete", command=self.delete_Maintenance)
+        self.day_maintenance_listbox = Listbox(self, width=20, height=20)
+        self.day_maintenance_listbox.grid(column=4, row=2, padx=(30,0), pady=(30,0))
+        self.values = self.all_maintenance_today()
+        for i in self.values:
+            self.day_maintenance_listbox.insert(tk.END, i)
 
+
+        self.maintenance_button_del = Button(self, text="Delete", command=self.delete_Maintenance)
+    def all_maintenance_today(self):
+        cur = connection.cursor()
+        date = datetime.date.today()
+        find = """SELECT VIN, Make, Model, Year, Service FROM Vehicle NATURAL HasMaintence NATURAL JOIN Maintenance WHERE Date = %s;"""
+        cur.execute(find, (date,))
+        return cur.fetchall()
     def create_Maintenance(self):
         #create date object
         self.date = datetime.date(self.year.get(), self.month.get(), self.day.get())
