@@ -11,7 +11,10 @@ class Vehicle_add_delete(Toplevel):
     def __init__(self, master=None):
         super().__init__(master = master)
         self.title("Vehicle Add/Delete")
-        self.geometry("1500x1200")
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+# Set the geometry of the window to the full size of the screen
+        self.geometry(f"{screen_width}x{screen_height}")
         self.vin = StringVar()
         self.make = StringVar()
         self.model = StringVar()
