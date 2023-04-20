@@ -366,7 +366,6 @@ class Add_Delete_Accessory(Toplevel):
         self.audio_del_button = tk.Button(audio_frame, text="Delete Audio", command=self.delete_Audio)
         self.audio_del_button.grid(column=1, row=3, pady=(20,0), padx=(20,0))
 
-        
     def add_Interior(self):
         value = add_interior(self.connection, self.int_id.get(), self.int_type.get(), self.int_desc.get(), self.int_color.get())
         int_frame = tk.Frame(self, bg='#36454F', bd=5)
