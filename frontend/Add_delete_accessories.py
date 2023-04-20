@@ -11,7 +11,11 @@ class Add_Delete_Accessory(Toplevel):
     def __init__(self, master=None):
         super().__init__(master=master)
         self.title("Accessories")
-        self.geometry("600x600")
+        # Get the width and height of the screen
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        # Set the geometry of the window to the full size of the screen
+        self.geometry(f"{screen_width}x{screen_height}")
         self.configure(bg='#36454F')
         self.int_id = IntVar()
         self.int_type = StringVar()

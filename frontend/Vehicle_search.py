@@ -11,7 +11,10 @@ class Vehicle_search(Toplevel):
     def __init__(self, master=None):
         super().__init__(master=master)
         self.title("Vehicle Search")
-        self.geometry("600x600")
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+# Set the geometry of the window to the full size of the screen
+        self.geometry(f"{screen_width}x{screen_height}")
         self.configure(bg='#36454F')
         self.vin = StringVar()
         self.make = StringVar()
