@@ -152,7 +152,7 @@ class Advanced_search(Toplevel):
         advSearch_button = Button(self, text="Find Vehicle", command=self.find_vehicle_specific)
         advSearch_button.grid(column=1, row=4, pady=(10,0), padx=(20, 0), columnspan=1)
     def find_vehicle_specific(self):
-        cur = connection.cursor()
+        cur = self.connection.cursor()
         self.ext_type = self.exteriorPaint + " OR type = " + self.exteriorRims
         find ="""SELECT VIN, Make, Model, Year FROM Vehicle NATURAL JOIN HasInterior NATURAL JOIN Interior WHERE type = %s AND audio_id = %s AND package_id = %s AND VIN IN (SELECT VIN FROM vehicle NATURAL JOIN HasExterior NATURAL JOIN Exterior WHERE type= %s AND VIN IN (SELECT VIN FROM Vehicle NATURAL JOIN HasControls NATURAL JOIN Control WHERE type = %s AND VIN IN (SELECT VIN FROM Vehicle NATURAL JOIN HasFeatures NATURAL JOIN Feature WHERE name = %s AND VIN IN (SELECT VIN FROM Vehicle NATURAL JOIN HasWarranties NATURAL JOIN Warranty WHERE type = %s AND VIN IN (SELECT VIN FROM Vehicle NATURAL JOIN HasSafety NATURAL JOIN Safety WHERE name = %s)))));"""
         cur.execute(find,(self.interior.get(), self.audio.get(), self.packages.get(), self.ext_type, self.transmission.get(), self.features.get(), self.warrenties.get(), self.safety.get(),))
