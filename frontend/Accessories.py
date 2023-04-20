@@ -368,62 +368,202 @@ class Add_Delete_Accessory(Toplevel):
 
         
     def add_Interior(self):
-        add_interior(self.connection, self.int_id.get(), self.int_type.get(), self.int_desc.get(), self.int_color.get())
-        self.connection = connect()
+        value = add_interior(self.connection, self.int_id.get(), self.int_type.get(), self.int_desc.get(), self.int_color.get())
+        int_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(int_frame, text="Failed To add Interior", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(int_frame, text="Successfully added to Interior", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
     def delete_Interior(self):
-        delete_interior(self.connection, self.int_id.get(), self.int_type.get())
-        self.connection = connect()
+        value = delete_interior(self.connection, self.int_id.get(), self.int_type.get())
+        int_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(int_frame, text="Failed To delete Interior", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(int_frame, text="Successfully deleted Interior", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
     def add_Exterior(self):
-        add_exterior(self.connection, self.ext_id.get(), self.ext_type.get(), self.ext_desc.get(), self.ext_color.get())
-        self.connection = connect()
+        value = add_exterior(self.connection, self.ext_id.get(), self.ext_type.get(), self.ext_desc.get(), self.ext_color.get())
+        ext_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(ext_frame, text="Failed To add Exterior", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(ext_frame, text="Successfully added Exterior", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
     def delete_Exterior(self):
-        delete_exterior(self.connection, self.ext_id.get(), self.ext_type.get())
-        self.connection = connect()
+        value = delete_exterior(self.connection, self.ext_id.get(), self.ext_type.get())
+        ext_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(ext_frame, text="Failed To delete Exterior", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(ext_frame, text="Successfully deleted Exterior", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
     def add_Feature(self):
-        add_features(self.connection, self.feat_id.get(), self.feat_type.get(), self.feat_desc.get())
-        self.connection = connect()
+        value = add_features(self.connection, self.feat_id.get(), self.feat_type.get(), self.feat_desc.get())
+        feat_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(feat_frame, text="Failed To add Feature", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(feat_frame, text="Successfully added Feature", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
     def delete_Feature(self):
-        delete_features(self.connection, self.feat_id.get(), self.feat_type.get())
-        self.connection = connect()
+        value = delete_features(self.connection, self.feat_id.get(), self.feat_type.get())
+        feat_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(feat_frame, text="Failed To delete Feature", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(feat_frame, text="Successfully deleted Feature", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
     def add_Control(self):
-        add_control(self.connection, self.con_id.get(), self.con_type.get(), self.con_desc.get())
-        self.connection = connect()
+        value = add_control(self.connection, self.con_id.get(), self.con_type.get(), self.con_desc.get())
+        control_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(control_frame, text="Failed To add Control", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(control_frame, text="Successfully added Control", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
     def delete_Control(self):
-        delete_control(self.connection, self.con_id.get(), self.con_type.get())
-        self.connection = connect()
+        value = delete_control(self.connection, self.con_id.get(), self.con_type.get())
+        control_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(control_frame, text="Failed To delete Control", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(control_frame, text="Successfully deleted Control", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
     def add_Handling(self):
-        add_handling(self.connection, self.hand_id.get(), self.hand_type.get(), self.hand_desc.get())
-        self.connection = connect()
+        value = add_handling(self.connection, self.hand_id.get(), self.hand_type.get(), self.hand_desc.get())
+        hand_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(hand_frame, text="Failed To add Handling", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(hand_frame, text="Successfully added Handling ", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
     def delete_Handling(self):
-        delete_handling(self.connection, self.hand_id.get(), self.hand_type.get())
-        self.connection = connect()
+        value = delete_handling(self.connection, self.hand_id.get(), self.hand_type.get())
+        hand_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(hand_frame, text="Failed To delete Handling", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(hand_frame, text="Successfully deleted Handling", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
     def add_Audio(self):
-        add_audio(self.connection, self.audio_id.get(), self.audio_type.get(), self.audio_desc.get())
-        self.connection = connect()
+        value = add_audio(self.connection, self.audio_id.get(), self.audio_type.get(), self.audio_desc.get())
+        audio_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(audio_frame, text="Failed To add Audio", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(audio_frame, text="Successfully added Audio ", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
     def delete_Audio(self):
-        delete_audio(self.connection, self.audio_id.get(), self.audio_type.get())
-        self.connection = connect()
+        value = delete_audio(self.connection, self.audio_id.get(), self.audio_type.get())
+        audio_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(audio_frame, text="Failed To delete Audio", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(audio_frame, text="Successfully deleted Audio", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
     def add_Preformance(self):
-        add_performance(self.connection, self.preform_id.get(), self.preform_type.get(), self.preform_desc.get())
-        self.connection = connect()
+        value = add_performance(self.connection, self.preform_id.get(), self.preform_type.get(), self.preform_desc.get())
+        preform_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(preform_frame, text="Failed To add Performance ", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(preform_frame, text="Successfully added Performance", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
     def delete_Preformance(self):
-        delete_performance(self.connection, self.preform_id.get(), self.preform_type.get())
-        self.connection = connect()
+        value = delete_performance(self.connection, self.preform_id.get(), self.preform_type.get())
+        preform_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(preform_frame, text="Failed To delete Preformance", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(preform_frame, text="Successfully Deleted Preformance", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
     def add_Package(self):
-        add_package(self.connection, self.pack_id.get(), self.pack_type.get(), self.pack_desc.get())
-        self.connection = connect()
+        value = add_package(self.connection, self.pack_id.get(), self.pack_type.get(), self.pack_desc.get())
+        pack_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(pack_frame, text="Failed To add Package", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(pack_frame, text="Successfully added Package", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
     def delete_Package(self):
-        delete_package(self.connection, self.pack_id.get(), self.pack_type.get())
-        self.connection = connect()
+        value = delete_package(self.connection, self.pack_id.get(), self.pack_type.get())
+        pack_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(pack_frame, text="Failed To delete Package", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(pack_frame, text="Successfully added Package ", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
     def add_Safety(self):
-        add_safe_security(self.connection, self.safe_id.get(), self.safe_type.get(), self.safe_desc.get())
-        self.connection = connect()
+        value = add_safe_security(self.connection, self.safe_id.get(), self.safe_type.get(), self.safe_desc.get())
+        safe_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(safe_frame, text="Failed To add Safety/Security", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(safe_frame, text="Successfully added Safety/Security", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
     def delete_Safety(self):
-        delete_safe_security(self.connection, self.safe_id.get(), self.safe_type.get())
-        self.connection = connect()
+        value = delete_safe_security(self.connection, self.safe_id.get(), self.safe_type.get())
+        safe_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(safe_frame, text="Failed To delete Safety/Security", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(safe_frame, text="Successfully deleted Safety/Security", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
     def add_Warranty(self):
-        add_warranty(self.connection, self.warr_id.get(), self.warr_type.get(), self.warr_desc.get())
-        self.connection = connect()
+        value = add_warranty(self.connection, self.warr_id.get(), self.warr_type.get(), self.warr_desc.get())
+        warr_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(warr_frame, text="Failed To add Warranty", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(warr_frame, text="Successfully added Warranty ", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
     def delete_Warranty(self):
-        delete_warranty(self.connection, self.warr_id.get(), self.warr_type.get())
-        self.connection = connect()
+        value = delete_warranty(self.connection, self.warr_id.get(), self.warr_type.get())
+        warr_frame = tk.Frame(self, bg='#36454F', bd=5)
+        if value is False:
+            self.fail_label = tk.Label(warr_frame, text="Failed To delete Warranty ", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.fail_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+        else:
+            self.success_label = tk.Label(warr_frame, text="Successfully deleted Warranty ", bg='#36454F', fg='#FFFFFF', font=("Helvetica", 12))
+            self.success_label.grid(column=0, row=4, pady=(20,0), padx=(10,0), sticky=tk.W)
+            self.connection = connect()
