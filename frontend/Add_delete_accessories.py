@@ -71,6 +71,7 @@ class Add_Delete_Accessory(Toplevel):
         self.interior_add_button.grid(column=0, row = 4, pady=(20,0), padx=(20,0))
         self.interior_del_button = Button(self, text="Delete Interior", command=self.delete_Interior)
         self.interior_del_button.grid(column=1, row = 4, pady=(20,0), padx=(20,0))
+        
         #Build section for adding exterior
         self.exterior_id_label = Label(self, text="Exterior ID: ")
         self.exterior_id_label.grid(column=0, row=5, pady=(20,0), padx=(10,0))
@@ -228,18 +229,20 @@ class Add_Delete_Accessory(Toplevel):
         self.audio_add_button.grid(column=4, row = 11, pady=(20,0), padx=(20,0))
         self.audio_del_button = Button(self, text="Delete Audio", command=self.delete_Audio)
         self.audio_del_button.grid(column=5, row = 11, pady=(20,0), padx=(20,0))
+        
     def add_Interior(self):
         add_interior(self.connection, self.int_id.get(), self.int_type.get(), self.int_desc.get(), self.int_color.get())
     def delete_Interior(self):
         delete_interior(self.connection, self.int_id.get(), self.int_type.get())
+    
     def add_Exterior(self):
         add_exterior(self.connection, self.ext_id.get(), self.ext_type.get(), self.ext_desc.get(), self.int_color.get())
     def delete_Exterior(self):
         delete_exterior(self.connection, self.ext_id.get(), self.ext_type.get())
     def add_Feature(self):
-        add_feature(self.connection, self.feat_id.get(), self.feat_type.get(), self.feat_desc.get())
+        add_features(self.connection, self.feat_id.get(), self.feat_type.get(), self.feat_desc.get())
     def delete_Feature(self):
-        delete_feature(self.connection, self.feat_id.get(), self.feat_type.get())
+        delete_features(self.connection, self.feat_id.get(), self.feat_type.get())
     def add_Control(self):
         add_control(self.connection, self.con_id.get(), self.con_type.get(), self.con_desc.get())
     def delete_Control(self):
@@ -253,7 +256,7 @@ class Add_Delete_Accessory(Toplevel):
     def delete_Audio(self):
         delete_audio(self.connection, self.audio_id.get(), self.audio_type.get())
     def add_Preformance(self):
-        add_preformance(self.connection, self.preform_id.get(), self.preform_type.get(), self.preform_desc.get())
+        add_performance(self.connection, self.preform_id.get(), self.preform_type.get(), self.preform_desc.get())
     def delete_Preformance(self):
         delete_preformance(self.connection, self.preform_id.get(), self.preform_type.get())
     def add_Package(self):
@@ -261,11 +264,10 @@ class Add_Delete_Accessory(Toplevel):
     def delete_Package(self):
         delete_package(self.connection, self.pack_id.get(), self.pack_type.get())
     def add_Safety(self):
-        add_safety(self.connection, self.safe_id.get(), self.safe_type.get(), self.safe_desc.get())
+        add_safe_security(self.connection, self.safe_id.get(), self.safe_type.get(), self.safe_desc.get())
     def delete_Safety(self):
-        delete_safety(self.connection, self.safe_id.get(), self.safe_type.get())
+        delete_safe_security(self.connection, self.safe_id.get(), self.safe_type.get())
     def add_Warranty(self):
         add_warranty(self.connection, self.warr_id.get(), self.warr_type.get(), self.warr_desc.get())
     def delete_Warranty(self):
         delete_warranty(self.connection, self.warr_id.get(), self.warr_type.get())
-
