@@ -8,7 +8,6 @@ import tkinter as tk
 from tkinter import StringVar, IntVar, Button, Label, Entry, Toplevel
 
 
-
 class Vehicle_add_delete(Toplevel):
     def __init__(self, master=None):
         super().__init__(master = master)

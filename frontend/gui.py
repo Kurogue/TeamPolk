@@ -8,6 +8,7 @@ from frontend.Add_Delete_vehicle import *
 from frontend.Advanced_search import *
 from backend.queries.find_queries import *
 from frontend.Add_delete_accessories import *
+from frontend.Add_delete_Customer import *
 import datetime
 from PIL import ImageTk, Image
 
@@ -54,6 +55,10 @@ def add_delete():
 def add_accessory():
     Add_Delete_Accessory(root)
 
+def add_customer():
+    Vehicle_Sells(root)
+
+
 locate_vehicle_label = tk.Label(root, text="Do you wish to find a vehicle?", font=("Verdana", 12), fg="white", bg="#36454F")
 locate_vehicle_label.grid(column=0, row=0, padx=(label_padding, 0), pady=(160, 20))
 locate_vehicle_button = tk.Button(text="Yes", command=v_search, width=7, font=("Verdana", 10, "bold"), bg="white", fg="#36454F")
@@ -74,8 +79,10 @@ AccessoriesBar.grid(column=0, row=3, padx=(label_padding, 0), pady=(0, 20))
 AccessoriesButton = tk.Button(text="Yes", command=add_accessory, width=7, font=("Verdana", 10, "bold"), bg="white", fg="#36454F")
 AccessoriesButton.grid(column=1, row=3, pady=(0, 20))
 
-addBar.grid(column=0, row=5, padx=(label_padding, 0), pady=(0, 20))
-addButton.grid(column=1, row=5, padx=10, pady=(0, 20))
+CustomerBar = tk.Label(root, text="Add/Delete Customer", font=("Verdana", 12), fg="white", bg="#36454F")
+CustomerBar.grid(column=0, row=4, padx=(label_padding, 0), pady=(0, 20))
+CustomerButton = tk.Button(text="Yes", command=add_customer, width=7, font=("Verdana", 10, "bold"), bg="white", fg="#36454F")
+CustomerButton.grid(column=1, row=4, pady=(0, 20))
 
 list_padding = (screen_width - 880) // 2
 
